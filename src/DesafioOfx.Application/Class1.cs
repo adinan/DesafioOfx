@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DesafioOfx.Application
+﻿namespace DesafioOfx.Application
 {
     public class Class1
     {

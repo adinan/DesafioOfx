@@ -4,4 +4,19 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Events\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DesafioOfx.Core\DesafioOfx.Core.csproj" />
+    <ProjectReference Include="..\DesafioOfx.Domain\DesafioOfx.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -19,4 +19,11 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\DesafioOfx.Application\DesafioOfx.Application.csproj" />
+    <ProjectReference Include="..\..\src\DesafioOfx.Core\DesafioOfx.Core.csproj" />
+    <ProjectReference Include="..\..\src\DesafioOfx.Data\DesafioOfx.Data.csproj" />
+    <ProjectReference Include="..\..\src\DesafioOfx.Domain\DesafioOfx.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
