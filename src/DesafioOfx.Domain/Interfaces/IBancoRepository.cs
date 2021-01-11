@@ -1,11 +1,10 @@
 ﻿using DesafioOfx.Core.Data;
-using DesafioOfx.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace DesafioOfx.Domain
+namespace DesafioOfx.Domain.Interfaces
 {
     public interface IBancoRepository : IRepository<Banco>
     { 

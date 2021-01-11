@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace DesafioOfx.Core.Messages
+﻿namespace DesafioOfx.Core.Messages
 {
     public abstract class Message
     {
-        public string MassageType { get; set; }
+        public string MessageType { get; set; }
         public int AgregateId { get; set; }
 
         public Message()
         {
-            MassageType = GetType().Name;
+            MessageType = GetType().Name;
         }
     }
 }

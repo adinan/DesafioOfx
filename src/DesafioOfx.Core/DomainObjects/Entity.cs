@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DesafioOfx.Core.DomainObjects
+﻿namespace DesafioOfx.Core.DomainObjects
 {
     public abstract class Entity
     {

@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using DesafioOfx.Application.ViewModels;
 using DesafioOfx.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DesafioOfx.Application.AutoMapper
 {

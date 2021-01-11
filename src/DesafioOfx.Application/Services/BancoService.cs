@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DesafioOfx.Application.ViewModels;
 using DesafioOfx.Domain;
+using DesafioOfx.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
