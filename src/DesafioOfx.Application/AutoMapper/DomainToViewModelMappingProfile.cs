@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DesafioOfx.Application.ViewModels;
+using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Domain;
 
 namespace DesafioOfx.Application.AutoMapper
@@ -10,7 +10,7 @@ namespace DesafioOfx.Application.AutoMapper
         {
             CreateMap<Banco, BancoViewModel>();
             CreateMap<Agencia, AgenciaViewModel>();
-            CreateMap<Conta, BancoViewModel>();
+            CreateMap<Conta, ContaViewModel>();
             CreateMap<Transacao, TransacaoViewModel>();
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DesafioOfx.Application.ViewModels
+namespace DesafioOfx.Application.Queries.ViewModels
 {
     public class ContaViewModel
     {

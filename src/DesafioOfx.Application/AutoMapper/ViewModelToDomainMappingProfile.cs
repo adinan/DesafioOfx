@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DesafioOfx.Application.ViewModels;
+using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Domain;
 
 namespace DesafioOfx.Application.AutoMapper

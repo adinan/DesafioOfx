@@ -1,5 +1,8 @@
-﻿using DesafioOfx.Api.Extensions;
-using DesafioOfx.Application.Services;
+﻿using AutoMapper;
+using DesafioOfx.Api.Extensions;
+using DesafioOfx.Application.AutoMapper;
+using DesafioOfx.Application.Commands;
+using DesafioOfx.Application.Queries;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using DesafioOfx.Data;
@@ -18,16 +21,29 @@ namespace DesafioOfx.Api.Configuration
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             #region Contextos
-            services.AddScoped<MeuDbContext>();
+            services.AddScoped<ContaContext>();
             #endregion
 
             #region Repositorios
-            services.AddScoped<IBancoRepository, BancoRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
+            #endregion
+             
+
+            #region Events
+
             #endregion
 
-            #region Services
-            services.AddScoped<IBancoService, BancoService>();
+            #region Commands
+            services.AddScoped<IRequestHandler<AdicionarLancamentoFinanceiroCommand, bool>, LancamentoFinanceiroCommandHandler>();
             #endregion
+
+            #region Queries
+            services.AddScoped<IContaQueries, ContaQueries>();
+
+
+
+            #endregion
+
 
             #region Configuracaoes
             services.AddScoped<IMediatorHandler, MediatorHandler>();
@@ -38,6 +54,8 @@ namespace DesafioOfx.Api.Configuration
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
+            services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
 
             #endregion
 

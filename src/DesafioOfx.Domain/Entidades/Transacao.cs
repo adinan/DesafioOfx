@@ -27,5 +27,18 @@ namespace DesafioOfx.Domain
             CodigoReferencia = codigoReferencia;
             Descricacao = descricacao;
         }
+
+
+        internal void AssociarConta(int condaId)
+        {
+            ContaId = condaId;
+        }
+
+        public override bool EhValido()
+        {
+            //regras de commands
+            return true;
+        }
+
     }
 }

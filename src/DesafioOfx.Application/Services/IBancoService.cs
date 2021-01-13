@@ -1,4 +1,4 @@
-﻿using DesafioOfx.Application.ViewModels;
+﻿using DesafioOfx.Application.Queries.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

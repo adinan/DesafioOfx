@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesafioOfx.Application.ViewModels
+namespace DesafioOfx.Application.Queries.ViewModels
 {
     public class TransacaoViewModel
     {

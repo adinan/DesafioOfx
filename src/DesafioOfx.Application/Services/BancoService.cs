@@ -1,20 +1,12 @@
-﻿using AutoMapper;
-using DesafioOfx.Application.ViewModels;
-using DesafioOfx.Domain;
-using DesafioOfx.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace DesafioOfx.Application.Services
+﻿namespace DesafioOfx.Application.Services
 {
-    public class BancoService : IBancoService
+    public class BancoService //: IBancoService
     {
-        private readonly IBancoRepository _bancoRepository;
+        /*
+        private readonly IContaRepository _bancoRepository;
         private readonly IMapper _mapper;
 
-        public BancoService(IBancoRepository bancoRepository,
+        public BancoService(IContaRepository bancoRepository,
                             IMapper mapper)
         {
             _bancoRepository = bancoRepository;
@@ -63,6 +55,6 @@ namespace DesafioOfx.Application.Services
         public void Dispose()
         {
             _bancoRepository?.Dispose();
-        }
+        }*/
     }
 }

@@ -1,14 +1,23 @@
-﻿using DesafioOfx.Core.Data;
+﻿using DesafioOfx.Core.Communication.Mediator;
+using DesafioOfx.Core.Data;
+using DesafioOfx.Core.Messages;
 using DesafioOfx.Domain;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DesafioOfx.Data
 {
-    public class MeuDbContext : DbContext, IUnitOfWork
+    public class ContaContext : DbContext, IUnitOfWork
     {
-        public MeuDbContext(DbContextOptions<MeuDbContext> options) : base(options) { }
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public ContaContext(DbContextOptions<ContaContext> options, IMediatorHandler rebusHandler) : base(options) 
+        { 
+            _mediatorHandler = rebusHandler ?? throw new ArgumentNullException(nameof(rebusHandler));
+
+        }
 
         public DbSet<Banco> Bancos { get; set; }
         public DbSet<Agencia> Agencias { get; set; }
@@ -22,9 +31,9 @@ namespace DesafioOfx.Data
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
-            //modelBuilder.Ignore<Event>();
+            modelBuilder.Ignore<Event>();
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MeuDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ContaContext).Assembly);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
@@ -33,9 +42,10 @@ namespace DesafioOfx.Data
 
         public async Task<bool> Commit()
         {
-            //Alguma validação antes de salvar.
+            var sucesso = await base.SaveChangesAsync() > 0;
+            if (sucesso) await _mediatorHandler.PublicarEventos(this);
 
-            return await base.SaveChangesAsync() > 0;
+            return sucesso;
         }
     }
 }

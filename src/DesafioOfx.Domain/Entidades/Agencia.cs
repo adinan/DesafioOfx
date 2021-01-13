@@ -11,7 +11,7 @@ namespace DesafioOfx.Domain
         public string Digito { get; private set; }
         public string Nome { get; private set; }
         public Banco Banco { get; private set; }
-        public virtual List<Conta> Contas { get; private set; }
+        public List<Conta> Contas { get; private set; }
 
 
         public Agencia(int bancoId, string codigo, string digito, string nome)

@@ -12,8 +12,4 @@
     <ProjectReference Include="..\DesafioOfx.Core\DesafioOfx.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
 </Project>

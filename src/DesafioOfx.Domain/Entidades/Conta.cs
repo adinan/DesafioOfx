@@ -1,5 +1,6 @@
 ﻿using DesafioOfx.Core.DomainObjects;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DesafioOfx.Domain
 {
@@ -10,22 +11,69 @@ namespace DesafioOfx.Domain
         public string Digito { get; private set; }
         public Agencia Agencia { get; private set; }
 
-        private List<Transacao> _transacaos;
+        private readonly List<Transacao> _transacaos;
+
+        public IReadOnlyCollection<Transacao> Transacaos => _transacaos;
 
         public Conta(int agenciaId, string codigo, string digito)
         {
             AgenciaId = agenciaId;
             Codigo = codigo;
             Digito = digito;
+            _transacaos = new List<Transacao>();
         }
 
-        public IReadOnlyCollection<Transacao> Transacaos => _transacaos;
 
-        
+        public bool TransacaoExistente(Transacao transacao)
+        {
+            return _transacaos.Any(p => p.CodigoUnico == transacao.CodigoUnico);
+        }
 
         public void AdicionarTransacao(Transacao transacao)
         {
+            if (!transacao.EhValido()) return;
+
+            var transacaoExistente = Transacaos.Any(p => p.CodigoUnico == transacao.CodigoUnico);
+            if (CodigoUnidoEmUso(transacao.CodigoUnico)) throw new DomainException($"Transação com o código {transacao.CodigoUnico} duplicado");
+
             _transacaos.Add(transacao);
+        }
+
+        public void AtualizarTransacao(Transacao transacao)
+        {
+            if (!transacao.EhValido()) return;
+            transacao.AssociarConta(Id);
+
+            if (CodigoUnidoEmUso(transacao.CodigoUnico, transacao.Id)) throw new DomainException($"Transação com o código {transacao.CodigoUnico} duplicado");
+
+            var transacaoExistente = Transacaos.FirstOrDefault(p => p.Id == transacao.Id);
+            if (transacaoExistente == null) throw new DomainException("A transacao não pertence a conta");
+
+
+            _transacaos.Remove(transacaoExistente);
+            _transacaos.Add(transacao);
+        }
+
+        public bool CodigoUnidoEmUso(string codigoUnico, int excluirTransacaoId = 0)
+        {
+            return Transacaos.Any(p => p.CodigoUnico == codigoUnico && (excluirTransacaoId == 0 || p.TipoTransacao != excluirTransacaoId));
+        }
+
+
+        public void RemoverTransacao(Transacao transacao)
+        {
+            if (!transacao.EhValido()) return;
+
+            var itemExistente = Transacaos.FirstOrDefault(p => p.Id == transacao.Id);
+
+            if (itemExistente == null) throw new DomainException("A transacao não pertence a conta");
+            _transacaos.Remove(itemExistente);
+        }
+
+        public override bool EhValido()
+        {
+            //regras de commands
+            return true;
         }
     }
 }

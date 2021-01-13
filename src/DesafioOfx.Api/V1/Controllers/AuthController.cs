@@ -33,8 +33,7 @@ namespace DesafioOfx.Api.V1.Controllers
                               SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
                               IOptions<AppSettings> appSettings,
-                              IUser user, 
-                              ILogger<AuthController> logger) : base(notifications, mediatorHandler, user)
+                              ILogger<AuthController> logger) : base(notifications, mediatorHandler)
         {
             _signInManager = signInManager;
             _userManager = userManager;

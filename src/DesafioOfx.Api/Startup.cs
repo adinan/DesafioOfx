@@ -36,7 +36,7 @@ namespace DesafioOfx.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MeuDbContext>(options =>
+            services.AddDbContext<ContaContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });

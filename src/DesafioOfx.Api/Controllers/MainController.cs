@@ -15,24 +15,11 @@ namespace DesafioOfx.Api.Controllers
         private readonly DomainNotificationHandler _notifications;
         private readonly IMediatorHandler _mediatorHandler;
 
-        public readonly IUser AppUser;
-
-        protected Guid UsuarioId { get; set; }
-        protected bool UsuarioAutenticado { get; set; }
-
         protected MainController(INotificationHandler<DomainNotification> notifications,
-                                 IMediatorHandler mediatorHandler,
-                                 IUser appUser)
+                                 IMediatorHandler mediatorHandler)
         {
             _notifications = (DomainNotificationHandler)notifications;
             _mediatorHandler = mediatorHandler;
-            AppUser = appUser;
-
-            if (appUser.IsAuthenticated())
-            {
-                UsuarioId = appUser.GetUserId();
-                UsuarioAutenticado = true;
-            }
         }
 
         protected bool OperacaoValida()
