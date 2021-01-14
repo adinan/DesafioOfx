@@ -6,9 +6,9 @@ namespace DesafioOfx.Application.Commands
 {
 
 
-    public class AdicionarLancamentoFinanceiroCommand : Command
+    public class AdicionarLancamentoFinanceiroContaCommand : Command
     {
-        public int ContaId { get; private set; }
+        public int ContaId { get; private set; } //TRNTYPE
         public int TipoTransacao { get; private set; } //TRNTYPE
         public DateTime DataLancamento { get; private set; }//DTPOSTED
         public decimal Valor { get; private set; } //TRNAMT
@@ -18,8 +18,9 @@ namespace DesafioOfx.Application.Commands
         public string Descricacao { get; private set; } //MEMO
 
 
-        public AdicionarLancamentoFinanceiroCommand(int tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
+        public AdicionarLancamentoFinanceiroContaCommand(int contaId, int tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
         {
+            ContaId = contaId;
             TipoTransacao = tipoTransacao;
             DataLancamento = dataLancamento;
             Valor = valor;
@@ -36,13 +37,13 @@ namespace DesafioOfx.Application.Commands
         }
     }
 
-    public class AdicionarLancamentoFinanceiroValidation : AbstractValidator<AdicionarLancamentoFinanceiroCommand>
+    public class AdicionarLancamentoFinanceiroValidation : AbstractValidator<AdicionarLancamentoFinanceiroContaCommand>
     {
         public AdicionarLancamentoFinanceiroValidation()
         {
             RuleFor(c => c.ContaId)
-                .GreaterThan(0)
-                .WithMessage("{PropertyName} inválido");
+               .GreaterThan(0)
+               .WithMessage("{PropertyName} inválido");
 
             RuleFor(c => c.TipoTransacao)
                 .GreaterThan(0)

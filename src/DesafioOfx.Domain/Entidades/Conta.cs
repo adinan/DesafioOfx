@@ -24,9 +24,9 @@ namespace DesafioOfx.Domain
         }
 
 
-        public bool TransacaoExistente(Transacao transacao)
+        public bool TransacaoExistente(int transacaoId)
         {
-            return _transacaos.Any(p => p.CodigoUnico == transacao.CodigoUnico);
+            return _transacaos.Any(p => p.Id == transacaoId);
         }
 
         public void AdicionarTransacao(Transacao transacao)
@@ -39,24 +39,27 @@ namespace DesafioOfx.Domain
             _transacaos.Add(transacao);
         }
 
-        public void AtualizarTransacao(Transacao transacao)
+        public void AtualizarTransacao(int transacaoId, Transacao transacao)
         {
             if (!transacao.EhValido()) return;
-            transacao.AssociarConta(Id);
 
-            if (CodigoUnidoEmUso(transacao.CodigoUnico, transacao.Id)) throw new DomainException($"Transação com o código {transacao.CodigoUnico} duplicado");
+            if (CodigoUnidoEmUso(transacao.CodigoUnico, transacaoId)) throw new DomainException($"Transação com o código {transacao.CodigoUnico} duplicado");
 
-            var transacaoExistente = Transacaos.FirstOrDefault(p => p.Id == transacao.Id);
+            var transacaoExistente = Transacaos.FirstOrDefault(p => p.Id == transacaoId);
             if (transacaoExistente == null) throw new DomainException("A transacao não pertence a conta");
 
-
-            _transacaos.Remove(transacaoExistente);
-            _transacaos.Add(transacao);
+            transacaoExistente.AtualizarTipoTransacao(transacao.TipoTransacao);
+            transacaoExistente.AtualizarDataLancamento(transacao.DataLancamento);
+            transacaoExistente.AtualizarValor(transacao.Valor);
+            transacaoExistente.AtualizarCodigoUnico(transacao.CodigoUnico);
+            transacaoExistente.AtualizarProtocolo(transacao.Protocolo);
+            transacaoExistente.AtualizarCodigoReferencia(transacao.CodigoReferencia);
+            transacaoExistente.AtualizarDescricacao(transacao.Descricacao);
         }
 
         public bool CodigoUnidoEmUso(string codigoUnico, int excluirTransacaoId = 0)
         {
-            return Transacaos.Any(p => p.CodigoUnico == codigoUnico && (excluirTransacaoId == 0 || p.TipoTransacao != excluirTransacaoId));
+            return Transacaos.Any(t => t.CodigoUnico == codigoUnico && (excluirTransacaoId == 0 || t.Id != excluirTransacaoId));
         }
 
 

@@ -8,9 +8,14 @@ namespace DesafioOfx.Application.AutoMapper
     {
         public ViewModelToCommandProfile()
         {
-            CreateMap<TransacaoViewModel, AdicionarLancamentoFinanceiroCommand>()
+            CreateMap<TransacaoViewModel, AdicionarLancamentoFinanceiroContaCommand>()
                .ConstructUsing(tvm =>
-                   new AdicionarLancamentoFinanceiroCommand(tvm.TipoTransacao, tvm.DataLancamento, tvm.Valor, tvm.CodigoUnico, tvm.Protocolo, tvm.CodigoReferencia, tvm.Descricacao)
+                   new AdicionarLancamentoFinanceiroContaCommand(tvm.ContaId, tvm.TipoTransacao, tvm.DataLancamento, tvm.Valor, tvm.CodigoUnico, tvm.Protocolo, tvm.CodigoReferencia, tvm.Descricacao)
+               );
+
+            CreateMap<TransacaoViewModel, AtualizarLancamentoFinanceiroContaCommand>()
+               .ConstructUsing(tvm =>
+                   new AtualizarLancamentoFinanceiroContaCommand(tvm.TransacaoId, tvm.ContaId, tvm.TipoTransacao, tvm.DataLancamento, tvm.Valor, tvm.CodigoUnico, tvm.Protocolo, tvm.CodigoReferencia, tvm.Descricacao)
                );
         }
     }

@@ -40,5 +40,46 @@ namespace DesafioOfx.Domain
             return true;
         }
 
+        internal void AtualizarTipoTransacao(int tipoTransacao)
+        {
+            TipoTransacao = tipoTransacao;
+
+        }
+
+        internal void AtualizarDataLancamento(DateTime dataLancamento)
+        {
+            DataLancamento = dataLancamento;
+
+        }
+
+        internal void AtualizarValor(decimal valor)
+        {
+            Valor = valor;
+
+        }
+
+        internal void AtualizarCodigoUnico(string codigoUnico)
+        {
+            CodigoUnico = codigoUnico;
+
+        }
+
+        internal void AtualizarProtocolo(string protocolo)
+        {
+            Protocolo = protocolo;
+
+        }
+
+        internal void AtualizarCodigoReferencia(string codigoReferencia)
+        {
+            CodigoReferencia = codigoReferencia;
+
+        }
+
+        internal void AtualizarDescricacao(string descricacao)
+        {
+            Descricacao = descricacao;
+
+        }
     }
 }

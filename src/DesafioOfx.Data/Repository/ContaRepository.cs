@@ -4,6 +4,7 @@ using DesafioOfx.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -30,9 +31,19 @@ namespace DesafioOfx.Data.Repository
             return conta;
         }
 
-        public Task<IEnumerable<Conta>> ObterContaPredicado(Expression<Func<Conta, bool>> predicate)
+        public async Task<IEnumerable<Conta>> ObterContaPredicado(Expression<Func<Conta, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context.Contas.AsNoTracking().Where(predicate).ToListAsync();
+        }
+
+        public async Task<Conta> ObterContaPorIdAsNoTracking(int contaId)
+        {
+            return await _context.Contas.AsNoTracking().FirstOrDefaultAsync(c => c.Id == contaId);
+        }
+
+        public async Task<Transacao> ObterTransacaoPorId(int transacaoId)
+        {
+            return await _context.Transacoes.AsNoTracking().FirstOrDefaultAsync(c => c.Id == transacaoId);
         }
 
 
@@ -41,9 +52,10 @@ namespace DesafioOfx.Data.Repository
             _context?.Dispose();
         }
 
-        public async Task<Conta> ObterContaPorIdAsNoTracking(int contaId)
+        public async Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico)
         {
-            return await _context.Contas.AsNoTracking().FirstOrDefaultAsync(c => c.Id == contaId);
+            return await _context.Transacoes.AsNoTracking().FirstOrDefaultAsync(c => c.CodigoUnico == codigoUnico);
+
         }
     }
 }

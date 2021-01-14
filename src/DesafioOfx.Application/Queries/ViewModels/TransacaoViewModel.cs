@@ -4,6 +4,7 @@ namespace DesafioOfx.Application.Queries.ViewModels
 {
     public class TransacaoViewModel
     {
+        public int TransacaoId { get; set; }
         public int ContaId { get; set; }
         public int TipoTransacao { get; set; } //TRNTYPE
         public DateTime DataLancamento { get; set; }//DTPOSTED

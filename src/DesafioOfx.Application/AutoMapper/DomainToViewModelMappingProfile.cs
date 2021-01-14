@@ -10,8 +10,11 @@ namespace DesafioOfx.Application.AutoMapper
         {
             CreateMap<Banco, BancoViewModel>();
             CreateMap<Agencia, AgenciaViewModel>();
-            CreateMap<Conta, ContaViewModel>();
-            CreateMap<Transacao, TransacaoViewModel>();
+            CreateMap<Conta, ContaViewModel>()
+                .ForMember(cvm => cvm.Transacoes, o => o.MapFrom(s => s.Transacaos));
+
+            CreateMap<Transacao, TransacaoViewModel>()
+                .ForMember(tvm => tvm.TransacaoId, o => o.MapFrom(s => s.Id));
         }
     }
 }

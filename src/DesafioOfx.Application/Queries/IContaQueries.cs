@@ -8,5 +8,7 @@ namespace DesafioOfx.Application.Queries
         Task<ContaViewModel> ObterContaId(int ContId);
 
         Task<RelatorioViewModel> ObteRelatorio(int ContId);
+        Task<ContaViewModel> ObterConta(InformacaoContaPessoaViewModel viewModel);
+        Task<TransacaoViewModel> ObterTransacaoPorCodigoUnico(string codigoUnico);
     }
 }

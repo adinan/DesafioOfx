@@ -1,17 +1,19 @@
 ﻿using DesafioOfx.Core.Messages;
 using System;
 
-namespace DesafioOfx.Application.Commands
+namespace DesafioOfx.Application.Events
 {
-    public class LancamentoFinanceiroAdicionadoEvent : Event
+    public class LancamentoFinanceiroAtualizadoContaEvent : Event
     {
         public int ContaId { get; set; }
+        public int TransacaoId { get; set; }
         public decimal Valor { get; set; }
         public DateTime DataLancamento { get; set; }
 
-        public LancamentoFinanceiroAdicionadoEvent(int contaId, decimal valor, DateTime dataLancamento)
+        public LancamentoFinanceiroAtualizadoContaEvent(int contaId, int transacaoId, decimal valor, DateTime dataLancamento)
         {
             ContaId = contaId;
+            TransacaoId = transacaoId;
             Valor = valor;
             DataLancamento = dataLancamento;
         }

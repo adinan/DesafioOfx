@@ -2,6 +2,7 @@
 using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Domain.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DesafioOfx.Application.Queries
@@ -18,15 +19,31 @@ namespace DesafioOfx.Application.Queries
             _mapper = mapper;
         }
 
+        public async Task<ContaViewModel> ObterConta(InformacaoContaPessoaViewModel vm)
+        {
+            var conta = await _contaRepository.ObterContaPredicado(c => 
+                            c.Agencia.Banco.Codigo == vm.BancoCodigo && 
+                            c.Agencia.Codigo == vm.AgenciaCodigo && c.Agencia.Codigo == vm.AgenciaCodigo &&
+                            c.Codigo == vm.ContaCodigo && c.Digito == vm.ContaDigito);
+
+            return _mapper.Map<ContaViewModel>(conta.FirstOrDefault());
+        }
+
         public async Task<ContaViewModel> ObterContaId(int contId)
         {
-            var conta = await _contaRepository.ObterContaPorIdAsNoTracking(contId);
+            var conta = await _contaRepository.ObterContaPorId(contId);
             return _mapper.Map<ContaViewModel>(conta);
         }
 
         public Task<RelatorioViewModel> ObteRelatorio(int ContId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<TransacaoViewModel> ObterTransacaoPorCodigoUnico(string codigoUnico)
+        {
+            return _mapper.Map<TransacaoViewModel>(await _contaRepository.ObterTransacaoPorCodigoUnico(codigoUnico));
+
         }
     }
 }
