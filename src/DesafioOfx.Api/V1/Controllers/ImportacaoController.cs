@@ -1,10 +1,13 @@
 ﻿using DesafioOfx.Api.Controllers;
+using DesafioOfx.Application.Commands;
 using DesafioOfx.Application.Queries;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DesafioOfx.Api.V1.Controllers
@@ -26,31 +29,43 @@ namespace DesafioOfx.Api.V1.Controllers
         }
 
 
-        [RequestSizeLimit(40000000)]
+        [RequestSizeLimit(100000000)]
         [HttpPost("importar-arquivoOfx")]
-        public async Task<IActionResult> ImportarArquivoOfx(IFormFile file)
+        public async Task<IActionResult> ImportarArquivoOfx(IFormFile arquivo)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-           
-            return CustomResponse();
+            var stream = arquivo.OpenReadStream();
 
+            var nomeArquivo = new Guid().ToString();
+            if (!await UploadArquivoAlternativo(arquivo, nomeArquivo))
+                return CustomResponse(ModelState);
+
+            await _mediatorHandler.EnviarComando(new ImportarArquivoOfxContaCommand(nomeArquivo));
+
+            //Assert.AreEqual(8976, statement.TransactionList.Transactions.Count());
+
+            return CustomResponse();
         }
 
-        [RequestSizeLimit(40000000)]
-        //[DisableRequestSizeLimit]
-        [HttpPost("imagem")]
-        public ActionResult AdicionarImagem(IFormFile file)
+        private async Task<bool> UploadArquivoAlternativo(IFormFile arquivo, string nomeArquivo)
         {
-            if (file == null || file.Length == 0)
+            if (arquivo == null || arquivo.Length == 0)
             {
-                NotificarErro(GetType().Name, "Arquivo vazio!");
-
-                return CustomResponse();
+                NotificarErro(GetType().Name, "Forneça uma imagem para este produto!");
+                return false;
             }
 
-            return Ok(file);
-        } 
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", nomeArquivo);
+            
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await arquivo.CopyToAsync(stream);
+            }
+
+            return true;
+        }
 
     }
 }

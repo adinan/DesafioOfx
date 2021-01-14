@@ -12,6 +12,6 @@ namespace DesafioOfx.Domain.Interfaces
         Task<Conta> ObterContaPorIdAsNoTracking(int contaId);
         Task<IEnumerable<Conta>> ObterContaPredicado(Expression<Func<Conta, bool>> predicate);
         Task<Transacao> ObterTransacaoPorId(int transacaoId);
-        Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico);
+        Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico); 
     }
 }

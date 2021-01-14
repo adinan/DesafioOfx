@@ -1,27 +1,40 @@
-﻿using DesafioOfx.Application.Events;
+﻿using AutoMapper;
+using DesafioOfx.Application.Events;
+using DesafioOfx.Application.Queries;
+using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using DesafioOfx.Domain;
 using DesafioOfx.Domain.Interfaces;
 using MediatR;
+using OfxNet;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DesafioOfx.Application.Commands
 {
-    public class ContaCommandHandler : 
+    public class ContaCommandHandler :
         IRequestHandler<AdicionarLancamentoFinanceiroContaCommand, bool>,
-        IRequestHandler<AtualizarLancamentoFinanceiroContaCommand, bool>
+        IRequestHandler<AtualizarLancamentoFinanceiroContaCommand, bool>,
+        IRequestHandler<ImportarArquivoOfxContaCommand, bool>
     {
         private readonly IContaRepository _contaRepository;
         private readonly IMediatorHandler _mediatorHandler;
+        private readonly IContaQueries _contaQueries;
+        private readonly IMapper _mapper;
+
 
         public ContaCommandHandler(IContaRepository pedidoRepository,
-                                                  IMediatorHandler mediatorHandler)
+                                   IMediatorHandler mediatorHandler,
+                                   IMapper mapper)
         {
             _contaRepository = pedidoRepository;
             _mediatorHandler = mediatorHandler;
+            _mapper = mapper;
         }
 
 
@@ -79,6 +92,47 @@ namespace DesafioOfx.Application.Commands
 
             conta.AdicionarEvento(new LancamentoFinanceiroAtualizadoContaEvent(conta.Id, transacao.Id, transacao.Valor, transacao.DataLancamento)); ;
             return await _contaRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(ImportarArquivoOfxContaCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(message)) return false;
+
+            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", message.NomeArquivo);
+
+            var ofxNetInfo = OfxDocument.Load(enderecoArquivo)?.GetStatements()?.FirstOrDefault();
+            var contaOfx = ((OfxBankStatement)ofxNetInfo).Account;
+            var transacoesOfx = ofxNetInfo.TransactionList.Transactions;
+
+            if (transacoesOfx == null)
+            {
+                await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
+                return false;
+            } 
+
+            var contaId = _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>(contaOfx)).Result.ContaId;
+            var conta = await _contaRepository.ObterContaPorId(contaId);
+            if (conta == null)
+            {
+                await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, "Conta não encontrado!"));
+                return false;
+            }
+
+            //if (conta.CodigoUnidoEmUso(message.CodigoUnico))
+            //{
+            //    await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Transação com o código {message.CodigoUnico} duplicado!"));
+            //    return false;
+            //}
+
+            var transacao = new Transacao(message.TipoTransacao, message.DataLancamento, message.Valor, message.CodigoUnico, message.Protocolo, message.CodigoReferencia, message.Descricacao);
+            conta.AdicionarTransacao(transacao);
+
+            conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
+            return await _contaRepository.UnitOfWork.Commit();
+
+
+
+            return true;// await _contaRepository.UnitOfWork.Commit();
         }
 
         private bool ValidarComando(Command message)
