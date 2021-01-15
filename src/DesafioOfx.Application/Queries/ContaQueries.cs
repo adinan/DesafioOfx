@@ -21,6 +21,11 @@ namespace DesafioOfx.Application.Queries
 
         public async Task<ContaViewModel> ObterConta(InformacaoContaPessoaViewModel vm)
         {
+            if (string.IsNullOrWhiteSpace(vm.AgenciaCodigo))
+            {
+                vm.AgenciaCodigo = "0001";
+                vm.AgenciaDigito = "0";
+            }
             var conta = await _contaRepository.ObterContaPredicado(c => 
                             c.Agencia.Banco.Codigo == vm.BancoCodigo && 
                             c.Agencia.Codigo == vm.AgenciaCodigo && c.Agencia.Digito == vm.AgenciaDigito &&
