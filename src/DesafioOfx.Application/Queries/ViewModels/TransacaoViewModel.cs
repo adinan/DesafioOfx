@@ -6,7 +6,7 @@ namespace DesafioOfx.Application.Queries.ViewModels
     {
         public int TransacaoId { get; set; }
         public int ContaId { get; set; }
-        public int TipoTransacao { get; set; } //TRNTYPE
+        public string TipoTransacao { get; set; } //TRNTYPE
         public DateTime DataLancamento { get; set; }//DTPOSTED
         public decimal Valor { get; set; }
         public string CodigoUnico { get; set; }

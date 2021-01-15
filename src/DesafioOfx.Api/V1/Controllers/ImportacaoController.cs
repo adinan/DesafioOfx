@@ -35,36 +35,31 @@ namespace DesafioOfx.Api.V1.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var stream = arquivo.OpenReadStream();
-
-            var nomeArquivo = new Guid().ToString();
-            if (!await UploadArquivoAlternativo(arquivo, nomeArquivo))
-                return CustomResponse(ModelState);
-
-            await _mediatorHandler.EnviarComando(new ImportarArquivoOfxContaCommand(nomeArquivo));
-
-            //Assert.AreEqual(8976, statement.TransactionList.Transactions.Count());
-
-            return CustomResponse();
-        }
-
-        private async Task<bool> UploadArquivoAlternativo(IFormFile arquivo, string nomeArquivo)
-        {
             if (arquivo == null || arquivo.Length == 0)
             {
-                NotificarErro(GetType().Name, "Forneça uma imagem para este produto!");
-                return false;
+                NotificarErro(GetType().Name, "Forneça um arquivo!");
+                return CustomResponse();
             }
 
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", nomeArquivo);
-            
 
-            using (var stream = new FileStream(path, FileMode.Create))
+            var nomeArquivo = Guid.NewGuid().ToString();
+            var caminho = Path.Combine(Directory.GetCurrentDirectory(), "ofxFiles", $"{nomeArquivo}.ofx");
+
+            try
             {
-                await arquivo.CopyToAsync(stream);
+                using (var stream = new FileStream(caminho, FileMode.Create))
+                {
+                    await arquivo.CopyToAsync(stream);
+                }
+
+                await _mediatorHandler.EnviarComando(new ImportarArquivoOfxContaCommand(nomeArquivo));
+            }
+            finally
+            {
+                System.IO.File.Delete(caminho);
             }
 
-            return true;
+            return CustomResponse();
         }
 
     }

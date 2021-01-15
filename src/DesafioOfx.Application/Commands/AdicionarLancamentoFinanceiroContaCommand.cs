@@ -9,7 +9,7 @@ namespace DesafioOfx.Application.Commands
     public class AdicionarLancamentoFinanceiroContaCommand : Command
     {
         public int ContaId { get; private set; } //TRNTYPE
-        public int TipoTransacao { get; private set; } //TRNTYPE
+        public string TipoTransacao { get; private set; } //TRNTYPE
         public DateTime DataLancamento { get; private set; }//DTPOSTED
         public decimal Valor { get; private set; } //TRNAMT
         public string CodigoUnico { get; private set; } //FITID
@@ -18,7 +18,7 @@ namespace DesafioOfx.Application.Commands
         public string Descricacao { get; private set; } //MEMO
 
 
-        public AdicionarLancamentoFinanceiroContaCommand(int contaId, int tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
+        public AdicionarLancamentoFinanceiroContaCommand(int contaId, string tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
         {
             ContaId = contaId;
             TipoTransacao = tipoTransacao;
@@ -46,7 +46,7 @@ namespace DesafioOfx.Application.Commands
                .WithMessage("{PropertyName} inválido");
 
             RuleFor(c => c.TipoTransacao)
-                .GreaterThan(0)
+                .NotEmpty()
                 .WithMessage("{PropertyName} inválido");
 
             RuleFor(c => c.DataLancamento)

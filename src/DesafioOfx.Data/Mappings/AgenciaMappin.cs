@@ -19,7 +19,6 @@ namespace DesafioOfx.Data.Mappings
                 .HasColumnType("varchar(100)");
 
             builder.Property(c => c.Digito)
-               .IsRequired()
                .HasColumnType("varchar(2)");
 
             builder.Property(c => c.Nome)

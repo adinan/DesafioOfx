@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DesafioOfx.Application.Commands;
 using DesafioOfx.Application.Queries.ViewModels;
+using OfxNet;
+using System;
 
 namespace DesafioOfx.Application.AutoMapper
 {
@@ -8,15 +10,14 @@ namespace DesafioOfx.Application.AutoMapper
     {
         public OfxNetToViewModelProfile()
         {
-            CreateMap<TransacaoViewModel, OfxStatementTransaction>()
-               .ConstructUsing(tvm =>
-                   new AdicionarLancamentoFinanceiroContaCommand(tvm.ContaId, tvm.TipoTransacao, tvm.DataLancamento, tvm.Valor, tvm.CodigoUnico, tvm.Protocolo, tvm.CodigoReferencia, tvm.Descricacao)
-               );
 
-            CreateMap<TransacaoViewModel, AtualizarLancamentoFinanceiroContaCommand>()
-               .ConstructUsing(tvm =>
-                   new AtualizarLancamentoFinanceiroContaCommand(tvm.TransacaoId, tvm.ContaId, tvm.TipoTransacao, tvm.DataLancamento, tvm.Valor, tvm.CodigoUnico, tvm.Protocolo, tvm.CodigoReferencia, tvm.Descricacao)
-               );
+            CreateMap<OfxBankAccount, InformacaoContaPessoaViewModel>()
+                .ForMember(dest => dest.BancoCodigo, opt => opt.MapFrom(src => src.BankId))
+                .ForMember(dest => dest.AgenciaCodigo, opt => opt.MapFrom(src => src.BranchId.Split("-", StringSplitOptions.None)[0]))
+                .ForMember(dest => dest.AgenciaDigito, opt => opt.MapFrom(src => src.BranchId.Contains("-") ? src.BranchId.Split("-", StringSplitOptions.None)[1] : null))
+                .ForMember(dest => dest.ContaCodigo, opt => opt.MapFrom(src => src.AccountNumber.Split("-", StringSplitOptions.None)[0]))
+                .ForMember(dest => dest.ContaDigito, opt => opt.MapFrom(src => src.BranchId.Contains("-") ? src.AccountNumber.Split("-", StringSplitOptions.None)[1] : null));
+
         }
     }
 }

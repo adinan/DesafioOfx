@@ -25,16 +25,21 @@ namespace DesafioOfx.Application.Commands
         private readonly IContaRepository _contaRepository;
         private readonly IMediatorHandler _mediatorHandler;
         private readonly IContaQueries _contaQueries;
+        private readonly DomainNotificationHandler _notifications;
         private readonly IMapper _mapper;
 
 
         public ContaCommandHandler(IContaRepository pedidoRepository,
                                    IMediatorHandler mediatorHandler,
-                                   IMapper mapper)
+                                   IMapper mapper,
+                                   INotificationHandler<DomainNotification> notifications,
+                                   IContaQueries contaQueries)
         {
             _contaRepository = pedidoRepository;
             _mediatorHandler = mediatorHandler;
             _mapper = mapper;
+            _notifications = (DomainNotificationHandler)notifications;
+            _contaQueries = contaQueries;
         }
 
 
@@ -98,7 +103,9 @@ namespace DesafioOfx.Application.Commands
         {
             if (!ValidarComando(message)) return false;
 
-            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", message.NomeArquivo);
+            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "ofxFiles", $"{message.NomeArquivo}.ofx");
+
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
             var ofxNetInfo = OfxDocument.Load(enderecoArquivo)?.GetStatements()?.FirstOrDefault();
             var contaOfx = ((OfxBankStatement)ofxNetInfo).Account;
@@ -108,31 +115,36 @@ namespace DesafioOfx.Application.Commands
             {
                 await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
                 return false;
-            } 
+            }
 
-            var contaId = _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>(contaOfx)).Result.ContaId;
-            var conta = await _contaRepository.ObterContaPorId(contaId);
-            if (conta == null)
+            var contavm = await _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>(contaOfx));
+            if (contavm == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, "Conta não encontrado!"));
                 return false;
             }
+            var conta = await _contaRepository.ObterContaPorId(contavm.ContaId);
 
-            //if (conta.CodigoUnidoEmUso(message.CodigoUnico))
-            //{
-            //    await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Transação com o código {message.CodigoUnico} duplicado!"));
-            //    return false;
-            //}
+            foreach (var ofx in transacoesOfx)
+            {
+                var command = new AdicionarLancamentoFinanceiroContaCommand(contavm.ContaId, ofx.TxType.ToString(), ofx.DatePosted.Date, ofx.Amount / 100, ofx.FitId, ofx.ChequeNumber, ofx.ReferenceNumber, ofx.Memo);
+                if (!ValidarComando(command)) continue;
 
-            var transacao = new Transacao(message.TipoTransacao, message.DataLancamento, message.Valor, message.CodigoUnico, message.Protocolo, message.CodigoReferencia, message.Descricacao);
-            conta.AdicionarTransacao(transacao);
+                if (conta.CodigoUnidoEmUso(command.CodigoUnico))
+                {
+                    await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Transação com o código {command.CodigoUnico} duplicado!"));
+                    continue;
+                }
 
-            conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
+                var transacao = new Transacao(command.TipoTransacao, command.DataLancamento, command.Valor, command.CodigoUnico, command.Protocolo, command.CodigoReferencia, command.Descricacao);
+                conta.AdicionarTransacao(transacao);
+                conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
+            }
+
+            //Regra: não salvar nada do arquivo caso exista alguma transacao invalida
+            if (_notifications.TemNotificacao()) return false;
+
             return await _contaRepository.UnitOfWork.Commit();
-
-
-
-            return true;// await _contaRepository.UnitOfWork.Commit();
         }
 
         private bool ValidarComando(Command message)

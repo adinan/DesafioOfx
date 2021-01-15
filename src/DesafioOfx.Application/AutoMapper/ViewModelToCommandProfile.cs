@@ -8,14 +8,7 @@ namespace DesafioOfx.Application.AutoMapper
     {
         public ViewModelToCommandProfile()
         {
-            CreateMap<OfxStatementTransaction, TransacaoViewModel>()
-               .ForMember(dest => dest.TipoTransacao, opt => opt.MapFrom(src => src.Amount))
-               .ForMember(dest => dest.DataLancamento, opt => opt.MapFrom(src => src.DatePosted))
-               .ForMember(dest => dest.Valor, opt => opt.MapFrom(src => src.Amount))
-               .ForMember(dest => dest.CodigoUnico, opt => opt.MapFrom(src => src.Amount))
-               .ForMember(dest => dest.Protocolo, opt => opt.MapFrom(src => ""))
-               .ForMember(dest => dest.CodigoReferencia, opt => opt.MapFrom(src => ""))
-               .ForMember(dest => dest.Descricacao, opt => opt.MapFrom(src => ""));
+            
 
             /*
              public int TransacaoId { get; set; }

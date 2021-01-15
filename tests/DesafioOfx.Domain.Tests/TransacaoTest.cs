@@ -20,7 +20,7 @@ namespace DesafioOfx.Domain.Tests
             <MEMO>Transferência recebida - 03/12 1031      19472-7 KEMILA PELLIN</MEMO>
              */
 
-            var transacao = new Transacao(3, DateTime.Now, (decimal)260.00, "202012030260000", "031000019472", "601.031.000.019.472", "Transferência recebida - 03/12 1031      19472-7 KEMILA PELLIN");
+            var transacao = new Transacao("debt", DateTime.Now, (decimal)260.00, "202012030260000", "031000019472", "601.031.000.019.472", "Transferência recebida - 03/12 1031      19472-7 KEMILA PELLIN");
 
             //Act
             //var result = transacao.IsValid();
@@ -45,7 +45,7 @@ namespace DesafioOfx.Domain.Tests
             <MEMO>Transferência recebida - 03/12 1031      19472-7 KEMILA PELLIN</MEMO>
              */
 
-            var transacao = new Transacao(0, DateTime.MinValue, (decimal)260.00, "", "", "", "");
+            var transacao = new Transacao("deby", DateTime.MinValue, (decimal)260.00, "", "", "", "");
 
             //Act
             //var result = transacao.IsValid();

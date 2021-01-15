@@ -40,6 +40,7 @@ namespace DesafioOfx.Api.Configuration
             #region Commands
             services.AddScoped<IRequestHandler<AdicionarLancamentoFinanceiroContaCommand, bool>, ContaCommandHandler>();
             services.AddScoped<IRequestHandler<AtualizarLancamentoFinanceiroContaCommand, bool>, ContaCommandHandler>();
+            services.AddScoped<IRequestHandler<ImportarArquivoOfxContaCommand, bool>, ContaCommandHandler>();
             #endregion
 
 

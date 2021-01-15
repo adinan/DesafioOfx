@@ -13,7 +13,7 @@ namespace DesafioOfx.Data.Mappings
 
             builder.Property(c => c.TipoTransacao)
                 .IsRequired()
-                .HasColumnType("int");
+                .HasColumnType("varchar(100)");
 
             builder.Property(c => c.DataLancamento)
                .IsRequired()

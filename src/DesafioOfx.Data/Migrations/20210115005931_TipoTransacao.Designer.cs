@@ -4,14 +4,16 @@ using DesafioOfx.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DesafioOfx.Data.Migrations
 {
     [DbContext(typeof(ContaContext))]
-    partial class ContaContextModelSnapshot : ModelSnapshot
+    [Migration("20210115005931_TipoTransacao")]
+    partial class TipoTransacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +36,7 @@ namespace DesafioOfx.Data.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Digito")
+                        .IsRequired()
                         .HasColumnType("varchar(2)");
 
                     b.Property<string>("Nome")
@@ -77,11 +80,10 @@ namespace DesafioOfx.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Codigo")
-                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Digito")
-                        .HasColumnType("varchar(2)");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 

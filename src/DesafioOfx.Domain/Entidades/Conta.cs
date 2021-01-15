@@ -6,10 +6,12 @@ namespace DesafioOfx.Domain
 {
     public class Conta : Entity
     {
-        public int AgenciaId { get; private set; }
+        public int? AgenciaId { get; private set; }
+        public int BancoId { get; private set; }
         public string Codigo { get; private set; }
         public string Digito { get; private set; }
         public Agencia Agencia { get; private set; }
+        public Banco Banco { get; private set; }??
 
         private readonly List<Transacao> _transacaos;
 

@@ -6,10 +6,10 @@ namespace DesafioOfx.Domain
     public class Transacao : Entity
     {
         public int ContaId { get; private set; }
-        public int TipoTransacao { get; private set; } //TRNTYPE
+        public string TipoTransacao { get; private set; } //TRNTYPE
         public DateTime DataLancamento { get; private set; }//DTPOSTED
         public decimal Valor { get; private set; }
-        public string CodigoUnico { get; private set; }
+        public string CodigoUnico { get; private set; } //FITID
         public string Protocolo { get; private set; } //CHECKNUM
         public string CodigoReferencia { get; private set; } //REFNUM
         public string Descricacao { get; private set; } //MEMO
@@ -17,7 +17,7 @@ namespace DesafioOfx.Domain
         public Conta Conta { get; private set; }
 
 
-        public Transacao(int tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
+        public Transacao(string tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
         {
             TipoTransacao = tipoTransacao;
             DataLancamento = dataLancamento;
@@ -40,7 +40,7 @@ namespace DesafioOfx.Domain
             return true;
         }
 
-        internal void AtualizarTipoTransacao(int tipoTransacao)
+        internal void AtualizarTipoTransacao(string tipoTransacao)
         {
             TipoTransacao = tipoTransacao;
 

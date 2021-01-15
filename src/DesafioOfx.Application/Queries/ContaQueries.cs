@@ -23,7 +23,7 @@ namespace DesafioOfx.Application.Queries
         {
             var conta = await _contaRepository.ObterContaPredicado(c => 
                             c.Agencia.Banco.Codigo == vm.BancoCodigo && 
-                            c.Agencia.Codigo == vm.AgenciaCodigo && c.Agencia.Codigo == vm.AgenciaCodigo &&
+                            c.Agencia.Codigo == vm.AgenciaCodigo && c.Agencia.Digito == vm.AgenciaDigito &&
                             c.Codigo == vm.ContaCodigo && c.Digito == vm.ContaDigito);
 
             return _mapper.Map<ContaViewModel>(conta.FirstOrDefault());
