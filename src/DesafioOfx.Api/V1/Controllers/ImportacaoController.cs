@@ -18,18 +18,15 @@ namespace DesafioOfx.Api.V1.Controllers
     public class ImportacaoController : MainController
     {
         private IMediatorHandler _mediatorHandler;
-        private readonly IContaQueries _contaQueries;
 
         public ImportacaoController(INotificationHandler<DomainNotification> notifications,
-                              IMediatorHandler mediatorHandler,
-                              IContaQueries contaQueries) : base(notifications, mediatorHandler)
+                              IMediatorHandler mediatorHandler) : base(notifications, mediatorHandler)
         {
             _mediatorHandler = mediatorHandler;
-            _contaQueries = contaQueries;
         }
 
 
-        [RequestSizeLimit(100000000)]
+        [RequestSizeLimit(10000000)]
         [HttpPost("importar-arquivoOfx")]
         public async Task<IActionResult> ImportarArquivoOfx(IFormFile arquivo)
         {
@@ -52,7 +49,7 @@ namespace DesafioOfx.Api.V1.Controllers
                     await arquivo.CopyToAsync(stream);
                 }
 
-                await _mediatorHandler.EnviarComando(new ImportarArquivoOfxContaCommand(nomeArquivo));
+                await _mediatorHandler.EnviarComando(new ImportarArquivoOfxCommand(nomeArquivo));
             }
             finally
             {

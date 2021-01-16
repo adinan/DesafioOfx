@@ -20,7 +20,9 @@ namespace DesafioOfx.Application.Commands
     public class ContaCommandHandler :
         IRequestHandler<AdicionarLancamentoFinanceiroContaCommand, bool>,
         IRequestHandler<AtualizarLancamentoFinanceiroContaCommand, bool>,
-        IRequestHandler<ImportarArquivoOfxContaCommand, bool>
+        IRequestHandler<AdicionarLoteLancamentoFinanceiroContaCommand, bool>
+
+        
     {
         private readonly IContaRepository _contaRepository;
         private readonly IMediatorHandler _mediatorHandler;
@@ -99,27 +101,37 @@ namespace DesafioOfx.Application.Commands
             return await _contaRepository.UnitOfWork.Commit();
         }
 
-        public async Task<bool> Handle(ImportarArquivoOfxContaCommand message, CancellationToken cancellationToken)
+        public async Task<bool> Handle(AdicionarLoteLancamentoFinanceiroContaCommand request, CancellationToken cancellationToken)
         {
-            if (!ValidarComando(message)) return false;
+            if (!ValidarComando(request)) return false;
 
-            if (!ValidarArquivo(out OfxStatement ofxNetInfo, message.NomeArquivo)) return false;
-
-            var contaVm = await _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>((ofxNetInfo as OfxBankStatement).Account));
-            if (contaVm == null)
+            var conta = await _contaRepository.ObterContaPorId(request.ContaId);
+            if (conta == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, "Conta não encontrado!"));
                 return false;
             }
 
-            await ConverterOfxNetParaContexto(ofxNetInfo, contaVm.ContaId);
+            foreach (var message in request.ListaLancamentoFinanceiroContaCommand)
+            {
+                if (conta.CodigoUnidoEmUso(message.CodigoUnico))
+                {
+                    await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Transação com o código {message.CodigoUnico} duplicado!"));
+                    continue;
+                }
+
+                var transacao = new Transacao(message.TipoTransacao, message.DataLancamento, message.Valor, message.CodigoUnico, message.Protocolo, message.CodigoReferencia, message.Descricacao);
+                conta.AdicionarTransacao(transacao);
+
+                conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
+            }
 
             //Regra: não salvar nada do arquivo caso exista alguma transacao invalida
             if (_notifications.TemNotificacao()) return false;
 
             return await _contaRepository.UnitOfWork.Commit();
         }
-
+        /*
         private async Task ConverterOfxNetParaContexto(OfxStatement ofxNetInfo, int contaId)
         {
             var conta = await _contaRepository.ObterContaPorId(contaId);
@@ -164,7 +176,7 @@ namespace DesafioOfx.Application.Commands
 
             return true;
         }
-
+        */
         private bool ValidarComando(Command message)
         {
             if (message.EhValido()) return true;
