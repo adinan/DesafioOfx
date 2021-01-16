@@ -6,7 +6,7 @@ namespace DesafioOfx.Domain
 {
     public class Conta : Entity
     {
-        public int? AgenciaId { get; private set; }
+        public int AgenciaId { get; private set; }
         public string Codigo { get; private set; }
         public string Digito { get; private set; }
         public Agencia Agencia { get; private set; }

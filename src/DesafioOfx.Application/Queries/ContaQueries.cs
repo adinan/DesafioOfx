@@ -24,7 +24,7 @@ namespace DesafioOfx.Application.Queries
             if (string.IsNullOrWhiteSpace(vm.AgenciaCodigo))
             {
                 vm.AgenciaCodigo = "0001";
-                vm.AgenciaDigito = "0";
+                vm.AgenciaDigito = null;
             }
             var conta = await _contaRepository.ObterContaPredicado(c => 
                             c.Agencia.Banco.Codigo == vm.BancoCodigo && 

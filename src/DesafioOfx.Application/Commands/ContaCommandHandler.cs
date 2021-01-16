@@ -9,7 +9,7 @@ using DesafioOfx.Domain;
 using DesafioOfx.Domain.Interfaces;
 using MediatR;
 using OfxNet;
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -103,31 +103,29 @@ namespace DesafioOfx.Application.Commands
         {
             if (!ValidarComando(message)) return false;
 
-            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "ofxFiles", $"{message.NomeArquivo}.ofx");
+            if (!ValidarArquivo(out OfxStatement ofxNetInfo, message.NomeArquivo)) return false;
 
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-            var ofxNetInfo = OfxDocument.Load(enderecoArquivo)?.GetStatements()?.FirstOrDefault();
-            var contaOfx = ((OfxBankStatement)ofxNetInfo).Account;
-            var transacoesOfx = ofxNetInfo.TransactionList.Transactions;
-
-            if (transacoesOfx == null)
-            {
-                await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
-                return false;
-            }
-
-            var contavm = await _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>(contaOfx));
-            if (contavm == null)
+            var contaVm = await _contaQueries.ObterConta(_mapper.Map<InformacaoContaPessoaViewModel>((ofxNetInfo as OfxBankStatement).Account));
+            if (contaVm == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, "Conta não encontrado!"));
                 return false;
             }
-            var conta = await _contaRepository.ObterContaPorId(contavm.ContaId);
 
-            foreach (var ofx in transacoesOfx)
+            await ConverterOfxNetParaContexto(ofxNetInfo, contaVm.ContaId);
+
+            //Regra: não salvar nada do arquivo caso exista alguma transacao invalida
+            if (_notifications.TemNotificacao()) return false;
+
+            return await _contaRepository.UnitOfWork.Commit();
+        }
+
+        private async Task ConverterOfxNetParaContexto(OfxStatement ofxNetInfo, int contaId)
+        {
+            var conta = await _contaRepository.ObterContaPorId(contaId);
+            foreach (var ofx in ofxNetInfo.TransactionList.Transactions)
             {
-                var command = new AdicionarLancamentoFinanceiroContaCommand(contavm.ContaId, ofx.TxType.ToString(), ofx.DatePosted.Date, ofx.Amount / 100, ofx.FitId, ofx.ChequeNumber, ofx.ReferenceNumber, ofx.Memo);
+                var command = new AdicionarLancamentoFinanceiroContaCommand(contaId, ofx.TxType.ToString(), ofx.DatePosted.Date, ofx.Amount, ofx.FitId, ofx.ChequeNumber, ofx.ReferenceNumber, ofx.Memo);
                 if (!ValidarComando(command)) continue;
 
                 if (conta.CodigoUnidoEmUso(command.CodigoUnico))
@@ -140,11 +138,31 @@ namespace DesafioOfx.Application.Commands
                 conta.AdicionarTransacao(transacao);
                 conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
             }
+        }
 
-            //Regra: não salvar nada do arquivo caso exista alguma transacao invalida
-            if (_notifications.TemNotificacao()) return false;
+        private bool ValidarArquivo(out OfxStatement ofxNetInfo, string nomeArquivo)
+        {
+            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "ofxFiles", $"{nomeArquivo}.ofx");
+            try
+            {
+                ofxNetInfo = OfxDocument.Load(enderecoArquivo)?.GetStatements()?.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Erro ao converter o arquivo. Erro:{ex.Message}"));
+                ofxNetInfo = new OfxStatement();
+                return false;
+            }
 
-            return await _contaRepository.UnitOfWork.Commit();
+            if (ofxNetInfo == null ||
+                ofxNetInfo.TransactionList == null ||
+                ofxNetInfo.TransactionList.Transactions == null)
+            {
+                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
+                return false;
+            }
+
+            return true;
         }
 
         private bool ValidarComando(Command message)

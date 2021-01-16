@@ -1,0 +1,358 @@
+OFXHEADER:100
+DATA:OFXSGML
+VERSION:102
+SECURITY:NONE
+ENCODING:USASCII
+CHARSET:1252
+COMPRESSION:NONE
+OLDFILEUID:NONE
+NEWFILEUID:NONE
+
+<OFX>
+   <SIGNONMSGSRSV1>
+      <SONRS>
+         <STATUS>
+            <CODE>0</CODE>
+            <SEVERITY>INFO</SEVERITY>
+         </STATUS>
+         <DTSERVER>20160305120000[-3:BRT]</DTSERVER>
+         <LANGUAGE>POR</LANGUAGE>
+         <FI>
+            <ORG>Banco do Brasil</ORG>
+            <FID>1</FID>
+         </FI>
+      </SONRS>
+   </SIGNONMSGSRSV1>
+   <BANKMSGSRSV1>
+      <STMTTRNRS>
+         <TRNUID>1</TRNUID>
+         <STATUS>
+            <CODE>0</CODE>
+            <SEVERITY>INFO</SEVERITY>
+         </STATUS>
+         <STMTRS>
+            <CURDEF>BRL</CURDEF>
+            <BANKACCTFROM>
+               <BANKID>1</BANKID>
+               <BRANCHID>4001-0</BRANCHID>
+               <ACCTID>7642-2</ACCTID>
+               <ACCTTYPE>CHECKING</ACCTTYPE>
+            </BANKACCTFROM>
+            <BANKTRANLIST>
+               <DTSTART>20160129120000[-3:BRT]</DTSTART>
+               <DTEND>20160229120000[-3:BRT]</DTEND>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160201120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>2485.05</TRNAMT>
+                  <FITID>2016020102485050</FITID>
+                  <CHECKNUM>000000006533</CHECKNUM>
+                  <REFNUM>6.533</REFNUM>
+                  <MEMO>Brasilprev - BRASILPREV SEGUROS E PREVIDENCIA S.</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160201120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-1000.00</TRNAMT>
+                  <FITID>2016020111000000</FITID>
+                  <CHECKNUM>516000018629</CHECKNUM>
+                  <REFNUM>520.516.000.018.629</REFNUM>
+                  <MEMO>Transferência on line - 01/02 0516      18629-5 MARMORARIA TOP</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160201120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-1500.00</TRNAMT>
+                  <FITID>2016020111500000</FITID>
+                  <CHECKNUM>000000020101</CHECKNUM>
+                  <REFNUM>20.101</REFNUM>
+                  <MEMO>Pagamento de Título - BANCO COOPERATIVO DO BRASIL S.A.</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160201120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-276.19</TRNAMT>
+                  <FITID>201602011276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Brasilprev</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160201120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>276.19</TRNAMT>
+                  <FITID>201602010276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Estorno de Débito</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160202120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>99.00</TRNAMT>
+                  <FITID>20160202099000</FITID>
+                  <CHECKNUM>001000007535</CHECKNUM>
+                  <REFNUM>604.001.000.007.535</REFNUM>
+                  <MEMO>Transferência on line - 02/02 4001       7535-3 VALDENIR TAVAR</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160202120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-276.19</TRNAMT>
+                  <FITID>201602021276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Brasilprev</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160202120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>276.19</TRNAMT>
+                  <FITID>201602020276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Estorno de Débito</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160203120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-276.19</TRNAMT>
+                  <FITID>201602031276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Brasilprev</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160203120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>276.19</TRNAMT>
+                  <FITID>201602030276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Estorno de Débito</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160210120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>119.00</TRNAMT>
+                  <FITID>201602100119000</FITID>
+                  <CHECKNUM>001000011871</CHECKNUM>
+                  <REFNUM>524.001.000.011.871</REFNUM>
+                  <MEMO>Transferência on line - 10/02 4001      11871-0 GILBERTO G P N</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160210120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-150.00</TRNAMT>
+                  <FITID>201602101150000</FITID>
+                  <CHECKNUM>001000016394</CHECKNUM>
+                  <REFNUM>524.001.000.016.394</REFNUM>
+                  <MEMO>Transferência on line - 10/02 4001      16394-5 ROSIVALDO L OL</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160211120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>270.00</TRNAMT>
+                  <FITID>201602110270000</FITID>
+                  <CHECKNUM>002960118814</CHECKNUM>
+                  <REFNUM>2.960.118.814</REFNUM>
+                  <MEMO>Depósito Online</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160211120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>60.00</TRNAMT>
+                  <FITID>20160211060000</FITID>
+                  <CHECKNUM>001000013571</CHECKNUM>
+                  <REFNUM>224.001.000.013.571</REFNUM>
+                  <MEMO>Transferência on line - 11/02 4001      13571-2 LUIS SALES DE</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>3.00</TRNAMT>
+                  <FITID>2016021203000</FITID>
+                  <CHECKNUM>001010007642</CHECKNUM>
+                  <REFNUM>4.001.010.007.642</REFNUM>
+                  <MEMO>Transferido da poupança - 12/02 4001       7642-2 OSIEL PEREIRA</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>3.00</TRNAMT>
+                  <FITID>2016021203001</FITID>
+                  <CHECKNUM>001510007642</CHECKNUM>
+                  <REFNUM>4.001.510.007.642</REFNUM>
+                  <MEMO>Transferido da poupança - 12/02 4001       7642-2 OSIEL PEREIRA</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-1.00</TRNAMT>
+                  <FITID>2016021211000</FITID>
+                  <CHECKNUM>001510007642</CHECKNUM>
+                  <REFNUM>524.001.510.007.642</REFNUM>
+                  <MEMO>Aplicação Poupança - 12/02 4001  510007642-5 OSIEL PEREIRA</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-2.00</TRNAMT>
+                  <FITID>2016021212000</FITID>
+                  <CHECKNUM>001510007642</CHECKNUM>
+                  <REFNUM>524.001.510.007.642</REFNUM>
+                  <MEMO>Aplicação Poupança - 12/02 4001  510007642-5 OSIEL PEREIRA</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-239.09</TRNAMT>
+                  <FITID>201602121239090</FITID>
+                  <CHECKNUM>000000021201</CHECKNUM>
+                  <REFNUM>21.201</REFNUM>
+                  <MEMO>Pagamento conta luz - CERON</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-132.67</TRNAMT>
+                  <FITID>201602121132670</FITID>
+                  <CHECKNUM>000000021202</CHECKNUM>
+                  <REFNUM>21.202</REFNUM>
+                  <MEMO>Pgto conta água - CAERD</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160212120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-34.69</TRNAMT>
+                  <FITID>20160212134690</FITID>
+                  <CHECKNUM>000000021203</CHECKNUM>
+                  <REFNUM>21.203</REFNUM>
+                  <MEMO>Pagto conta telefone - VIVO RO</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160219120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>36.02</TRNAMT>
+                  <FITID>20160219036020</FITID>
+                  <CHECKNUM>001000015547</CHECKNUM>
+                  <REFNUM>604.001.000.015.547</REFNUM>
+                  <MEMO>Transferência on line - 19/02 4001      15547-0 ANTONIO LOPES</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160219120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>83.94</TRNAMT>
+                  <FITID>20160219083940</FITID>
+                  <CHECKNUM>001000015547</CHECKNUM>
+                  <REFNUM>604.001.000.015.547</REFNUM>
+                  <MEMO>Transferência on line - 19/02 4001      15547-0 ANTONIO LOPES</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160222120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>200.00</TRNAMT>
+                  <FITID>201602220200000</FITID>
+                  <CHECKNUM>002739180053</CHECKNUM>
+                  <REFNUM>2.739.180.053</REFNUM>
+                  <MEMO>Depósito Online</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160222120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-15.00</TRNAMT>
+                  <FITID>20160222115000</FITID>
+                  <CHECKNUM>078088535313</CHECKNUM>
+                  <REFNUM>99.078.088.535.313</REFNUM>
+                  <MEMO>Telefone Pre-Pago - 69099078088-Vivo AC,DF,GO,MS,MT,RO,TO</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160222120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-200.00</TRNAMT>
+                  <FITID>201602221200000</FITID>
+                  <CHECKNUM>001000012959</CHECKNUM>
+                  <REFNUM>524.001.000.012.959</REFNUM>
+                  <MEMO>Transferência on line - 22/02 4001      12959-3 A A MIRANTE SE</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160222120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-0.95</TRNAMT>
+                  <FITID>201602221950</FITID>
+                  <CHECKNUM>531200320178</CHECKNUM>
+                  <REFNUM>880.531.200.320.178</REFNUM>
+                  <MEMO>TRANSF.RECURSO E I - Tarifa referente a 22/02/2016</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160223120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>548.50</TRNAMT>
+                  <FITID>201602230548500</FITID>
+                  <CHECKNUM>001000015547</CHECKNUM>
+                  <REFNUM>604.001.000.015.547</REFNUM>
+                  <MEMO>Transferência on line - 23/02 4001      15547-0 ANTONIO LOPES</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160224120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>219.00</TRNAMT>
+                  <FITID>201602240219000</FITID>
+                  <CHECKNUM>011888300078</CHECKNUM>
+                  <REFNUM>40.011.888.300.078</REFNUM>
+                  <MEMO>Dep Cheque BB Liquidado</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160224120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>69.90</TRNAMT>
+                  <FITID>20160224069900</FITID>
+                  <CHECKNUM>100004635658</CHECKNUM>
+                  <REFNUM>400.100.004.635.658</REFNUM>
+                  <MEMO>Transferência Agendada - 24/02 4001    4635658-4 JARLON GALDINO</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160224120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-940.00</TRNAMT>
+                  <FITID>201602241940000</FITID>
+                  <CHECKNUM>028354224576</CHECKNUM>
+                  <REFNUM>241.028.354.224.576</REFNUM>
+                  <MEMO>Saque no TAA - 24/02 10:28 SAA-MIRANTE DA SERRA</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160229120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>70.00</TRNAMT>
+                  <FITID>20160229070000</FITID>
+                  <CHECKNUM>001000007217</CHECKNUM>
+                  <REFNUM>604.001.000.007.217</REFNUM>
+                  <MEMO>Transferência on line - 29/02 4001       7217-6 OSMAR FERNANDE</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160229120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>-276.19</TRNAMT>
+                  <FITID>201602291276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Brasilprev</MEMO>
+               </STMTTRN>
+               <STMTTRN>
+                  <TRNTYPE>OTHER</TRNTYPE>
+                  <DTPOSTED>20160229120000[-3:BRT]</DTPOSTED>
+                  <TRNAMT>276.19</TRNAMT>
+                  <FITID>201602290276190</FITID>
+                  <CHECKNUM>000000013597</CHECKNUM>
+                  <REFNUM>13.597</REFNUM>
+                  <MEMO>Estorno de Débito</MEMO>
+               </STMTTRN>
+            </BANKTRANLIST>
+            <LEDGERBAL>
+               <BALAMT>73.74</BALAMT>
+               <DTASOF>20160229120000[-3:BRT]</DTASOF>
+            </LEDGERBAL>
+         </STMTRS>
+      </STMTTRNRS>
+   </BANKMSGSRSV1>
+</OFX>

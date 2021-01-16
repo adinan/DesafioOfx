@@ -6,12 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
-    <PackageReference Include="OfxNet" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DesafioOfx.Core\DesafioOfx.Core.csproj" />
     <ProjectReference Include="..\DesafioOfx.Domain\DesafioOfx.Domain.csproj" />
+    <ProjectReference Include="..\OfxNet\OfxNet.csproj" />
   </ItemGroup>
 
 </Project>

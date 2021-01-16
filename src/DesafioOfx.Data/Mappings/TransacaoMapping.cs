@@ -28,7 +28,6 @@ namespace DesafioOfx.Data.Mappings
                .HasColumnType("varchar(34)");
 
             builder.Property(c => c.CodigoReferencia)
-               .IsRequired()
                .HasColumnType("varchar(22)");
 
             builder.Property(c => c.Descricacao)
