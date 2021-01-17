@@ -14,12 +14,11 @@ docker-compose up -d
 ```
 
 Aguarde os downloads e configurações Docker serem finalizadas e depois as seguintes interfaces estarão disponíveis:
-- Mongo (através do Mongo express): http://localhost:8081/
 - Sql Server: localhost,1433 
-- Aplicação (através do swagger): http://localhost:32770/swagger/index.html
+- Aplicação (através do swagger): http://localhost:5001/swagger/index.html
 
 
-Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras APIs que precisão de autorização. Utilizar no Header da requisição Authorization: bearer tokenGerado 
+Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras APIs que precisão de autorização. Utilizar no Header da requisição Authorization: bearer {accessToken}
 
 A aplicação já vem com uma carga inicial nas tabelas Bancos, Agencias e Contas. Assim sendo possível já subir os 3 arquivos OFXs disponibilizados. 
 
