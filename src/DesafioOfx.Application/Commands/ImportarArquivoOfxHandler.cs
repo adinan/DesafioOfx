@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using DesafioOfx.Application.Events;
 using DesafioOfx.Application.Queries;
 using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
-using DesafioOfx.Domain;
-using DesafioOfx.Domain.Interfaces;
 using MediatR;
 using OfxNet;
 using System;
@@ -73,12 +70,16 @@ namespace DesafioOfx.Application.Commands
                 ofxNetInfo = new OfxStatement();
                 return false;
             }
+            var ofxConta = ofxNetInfo as OfxBankStatement;
 
-            if (ofxNetInfo == null ||
+            if (ofxConta == null ||
+                ofxConta.Account == null ||
+
+                ofxNetInfo == null ||
                 ofxNetInfo.TransactionList == null ||
                 ofxNetInfo.TransactionList.Transactions == null)
             {
-                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
+                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido ou não suportado!"));
                 return false;
             }
 

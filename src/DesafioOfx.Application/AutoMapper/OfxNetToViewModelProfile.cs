@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DesafioOfx.Application.Commands;
 using DesafioOfx.Application.Queries.ViewModels;
 using OfxNet;
 using System;

@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
 using DesafioOfx.Application.Events;
 using DesafioOfx.Application.Queries;
-using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using DesafioOfx.Domain;
 using DesafioOfx.Domain.Interfaces;
 using MediatR;
-using OfxNet;
-using System;
-using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

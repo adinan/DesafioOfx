@@ -61,10 +61,10 @@ namespace DesafioOfx.Api.Configuration
                 app.UseHsts();
 
                 app.UseLoggingConfiguration();
-                app.UseMiddleware<ExceptionMiddleware>();
+                //app.UseMiddleware<ExceptionMiddleware>();
             }
+            app.UseDeveloperExceptionPage();
 
-            //app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

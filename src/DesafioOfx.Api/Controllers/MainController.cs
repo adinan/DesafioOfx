@@ -1,10 +1,8 @@
 ﻿using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
-using DesafioOfx.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Linq;
 
 namespace DesafioOfx.Api.Controllers

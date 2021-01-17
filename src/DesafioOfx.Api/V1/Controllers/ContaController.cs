@@ -5,7 +5,6 @@ using DesafioOfx.Application.Queries;
 using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
-using DesafioOfx.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DesafioOfx.Api.V1.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/contas")]
     public class ContaController : MainController

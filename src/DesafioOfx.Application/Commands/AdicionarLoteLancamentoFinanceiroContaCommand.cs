@@ -1,6 +1,5 @@
 ﻿using DesafioOfx.Core.Messages;
 using FluentValidation;
-using System;
 using System.Collections.Generic;
 
 namespace DesafioOfx.Application.Commands

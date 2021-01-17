@@ -15,12 +15,6 @@ namespace DesafioOfx.Api.Configuration
         public static IServiceCollection AddIdentityConfig(this IServiceCollection services,
             IConfiguration configuration)
         {
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //    .AddErrorDescriber<IdentityMensagensPortugues>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 

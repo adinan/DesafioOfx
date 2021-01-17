@@ -7,10 +7,15 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
-COPY ["src/DesafioOfx.Api/DesafioOfx.Api.csproj", "src/DesafioOfx.Api/"]
-RUN dotnet restore "src/DesafioOfx.Api/DesafioOfx.Api.csproj"
+COPY ["./DesafioOfx.Api/DesafioOfx.Api.csproj", "DesafioOfx.Api/"]
+COPY ["./DesafioOfx.Application/DesafioOfx.Application.csproj", "DesafioOfx.Application/"]
+COPY ["./DesafioOfx.Core/DesafioOfx.Core.csproj", "DesafioOfx.Core/"]
+COPY ["./DesafioOfx.Data/DesafioOfx.Data.csproj", "DesafioOfx.Data/"]
+COPY ["./DesafioOfx.Domain/DesafioOfx.Domain.csproj", "DesafioOfx.Domain/"]
+
+RUN dotnet restore "DesafioOfx.Api/DesafioOfx.Api.csproj"
 COPY . .
-WORKDIR "/src/src/DesafioOfx.Api"
+WORKDIR "DesafioOfx.Api"
 RUN dotnet build "DesafioOfx.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -20,3 +25,5 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DesafioOfx.Api.dll"]
+
+RUN mkdir -p ofxFiles

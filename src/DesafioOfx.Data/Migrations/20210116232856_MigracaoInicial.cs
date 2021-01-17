@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DesafioOfx.Data.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class MigracaoInicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace DesafioOfx.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     BancoId = table.Column<int>(type: "int", nullable: false),
                     Codigo = table.Column<string>(type: "varchar(100)", nullable: false),
-                    Digito = table.Column<string>(type: "varchar(2)", nullable: false),
+                    Digito = table.Column<string>(type: "varchar(2)", nullable: true),
                     Nome = table.Column<string>(type: "varchar(1000)", nullable: false)
                 },
                 constraints: table =>
@@ -50,8 +50,8 @@ namespace DesafioOfx.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AgenciaId = table.Column<int>(type: "int", nullable: false),
-                    Codigo = table.Column<string>(type: "varchar(100)", nullable: true),
-                    Digito = table.Column<string>(type: "varchar(100)", nullable: true)
+                    Codigo = table.Column<string>(type: "varchar(100)", nullable: false),
+                    Digito = table.Column<string>(type: "varchar(2)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,12 +71,12 @@ namespace DesafioOfx.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ContaId = table.Column<int>(type: "int", nullable: false),
-                    TipoTransacao = table.Column<int>(type: "int", nullable: false),
+                    TipoTransacao = table.Column<string>(type: "varchar(100)", nullable: false),
                     DataLancamento = table.Column<DateTime>(type: "datetime", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CodigoUnico = table.Column<string>(type: "varchar(34)", nullable: false),
                     Protocolo = table.Column<string>(type: "varchar(100)", nullable: true),
-                    CodigoReferencia = table.Column<string>(type: "varchar(22)", nullable: false),
+                    CodigoReferencia = table.Column<string>(type: "varchar(22)", nullable: true),
                     Descricacao = table.Column<string>(type: "varchar(1000)", nullable: false)
                 },
                 constraints: table =>

@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ofxFiles\**" />
+    <Content Remove="ofxFiles\**" />
+    <EmbeddedResource Remove="ofxFiles\**" />
+    <None Remove="ofxFiles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="Elmah.Io.AspNetCore" Version="3.11.17" />
     <PackageReference Include="Elmah.Io.Extensions.Logging" Version="3.8.68" />

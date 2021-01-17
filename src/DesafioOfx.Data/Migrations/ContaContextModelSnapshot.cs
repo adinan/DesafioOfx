@@ -73,7 +73,7 @@ namespace DesafioOfx.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("AgenciaId")
+                    b.Property<int>("AgenciaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Codigo")
@@ -145,7 +145,8 @@ namespace DesafioOfx.Data.Migrations
                 {
                     b.HasOne("DesafioOfx.Domain.Agencia", "Agencia")
                         .WithMany("Contas")
-                        .HasForeignKey("AgenciaId");
+                        .HasForeignKey("AgenciaId")
+                        .IsRequired();
 
                     b.Navigation("Agencia");
                 });

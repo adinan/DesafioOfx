@@ -3,7 +3,6 @@ using DesafioOfx.Api.Extensions;
 using DesafioOfx.Api.ViewModels;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
-using DesafioOfx.Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

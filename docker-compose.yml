@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+    mundiapp:
+        image: froidy/desafiofx-api:lastest
+        container_name: desafioOfx
+        depends_on: 
+            - sql-server
+        build:
+            context: src
+            dockerfile: ./DesafioOfx.Api/Dockerfile
+        ports:
+            - "5001:5001"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=http://*:5001
+        
+    sql-server:
+        container_name: sql-server-db
+        image: froidy/desafiofx-sql-server
+        build:
+            context: sql
+            dockerfile: ./Dockerfile
+        ports:
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=Qwe@123senhoraforte

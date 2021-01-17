@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DesafioOfx.Data.Migrations
 {
     [DbContext(typeof(ContaContext))]
-    [Migration("20210115005931_TipoTransacao")]
-    partial class TipoTransacao
+    [Migration("20210116232856_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,6 @@ namespace DesafioOfx.Data.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Digito")
-                        .IsRequired()
                         .HasColumnType("varchar(2)");
 
                     b.Property<string>("Nome")
@@ -80,10 +79,11 @@ namespace DesafioOfx.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Codigo")
+                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Digito")
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("varchar(2)");
 
                     b.HasKey("Id");
 
@@ -100,7 +100,6 @@ namespace DesafioOfx.Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CodigoReferencia")
-                        .IsRequired()
                         .HasColumnType("varchar(22)");
 
                     b.Property<string>("CodigoUnico")

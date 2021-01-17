@@ -1,9 +1,9 @@
 ﻿using DesafioOfx.Api.Controllers;
 using DesafioOfx.Application.Commands;
-using DesafioOfx.Application.Queries;
 using DesafioOfx.Core.Communication.Mediator;
 using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DesafioOfx.Api.V1.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/importadores")]
     public class ImportacaoController : MainController
