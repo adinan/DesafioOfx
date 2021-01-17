@@ -46,16 +46,21 @@ namespace DesafioOfx.Data.Repository
             return await _context.Transacoes.AsNoTracking().FirstOrDefaultAsync(c => c.Id == transacaoId);
         }
 
+        public async Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico)
+        {
+            return await _context.Transacoes.AsNoTracking().FirstOrDefaultAsync(c => c.CodigoUnico == codigoUnico);
+
+        }
+
+        public async Task<IEnumerable<Transacao>> ObterTransacaoPredicado(Expression<Func<Transacao, bool>> predicate)
+        {
+            return await _context.Transacoes.AsNoTracking().Where(predicate).ToListAsync();
+        }
 
         public void Dispose()
         {
             _context?.Dispose();
         }
 
-        public async Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico)
-        {
-            return await _context.Transacoes.AsNoTracking().FirstOrDefaultAsync(c => c.CodigoUnico == codigoUnico);
-
-        }
     }
 }

@@ -43,31 +43,31 @@ namespace DesafioOfx.Application.Commands
         {
             RuleFor(c => c.ContaId)
                .GreaterThan(0)
-               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.TipoTransacao)
                 .NotEmpty()
-                .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+                .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.DataLancamento)
                .NotEqual(DateTime.MinValue)
-               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.Valor)
                .NotEqual(0)
-               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.CodigoUnico)
                .NotEmpty()
-               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.Protocolo)
                .NotEmpty()
-               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+               .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
 
             RuleFor(c => c.Descricacao)
              .NotEmpty()
-             .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor invalido na propriedade '{PropertyName}' inválido");
+             .WithMessage(c => "O lancamento financeiro com código '" + c.CodigoUnico + "' possui valor inválido na propriedade '{PropertyName}' inválido");
         }
     }
 }

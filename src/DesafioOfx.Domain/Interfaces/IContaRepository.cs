@@ -13,5 +13,7 @@ namespace DesafioOfx.Domain.Interfaces
         Task<IEnumerable<Conta>> ObterContaPredicado(Expression<Func<Conta, bool>> predicate);
         Task<Transacao> ObterTransacaoPorId(int transacaoId);
         Task<Transacao> ObterTransacaoPorCodigoUnico(string codigoUnico); 
+        Task<IEnumerable<Transacao>> ObterTransacaoPredicado(Expression<Func<Transacao, bool>> predicate);
+
     }
 }

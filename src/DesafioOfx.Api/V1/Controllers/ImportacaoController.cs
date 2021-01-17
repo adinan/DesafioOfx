@@ -26,6 +26,12 @@ namespace DesafioOfx.Api.V1.Controllers
         }
 
 
+        /// <summary>
+        /// Importar as transações de arquivo OFX para uma conta já previamente cadastrada no sistema.
+        /// Regra: Só é salvo algo no banco se todas as transações estiverem validas.
+        /// </summary>
+        /// <param name="arquivo"></param>
+        /// <returns></returns>
         [RequestSizeLimit(10000000)]
         [HttpPost("importar-arquivoOfx")]
         public async Task<IActionResult> ImportarArquivoOfx(IFormFile arquivo)

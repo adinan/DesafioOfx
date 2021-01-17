@@ -31,9 +31,16 @@ namespace DesafioOfx.Api.V1.Controllers
             _contaQueries = contaQueries;
         }
 
+        /// <summary>
+        /// Obtem conta pelo id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ContaViewModel>> ObterPorId(int id)
         {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
             var conta = await _contaQueries.ObterContaId(id);
 
             if (conta == null) return NotFound();
@@ -41,9 +48,20 @@ namespace DesafioOfx.Api.V1.Controllers
             return conta;
         }
 
+        /// <summary>
+        /// Obtem a conta atravez dos parametros informados.
+        /// </summary>
+        /// <param name="bancoCodigo">Exemplo: BB=1  Siscoob=756 HSBC=399</param>
+        /// <param name="agenciaCodigo"></param>
+        /// <param name="agenciaDigito"></param>
+        /// <param name="contaCodigo"></param>
+        /// <param name="contaDigito"></param>
+        /// <returns></returns>
         [HttpGet("obter-conta")]
         public async Task<ActionResult<ContaViewModel>> ObterConta(int bancoCodigo, string agenciaCodigo, string agenciaDigito, string contaCodigo, string contaDigito)
         {
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
+
             var viewModel = new InformacaoContaPessoaViewModel
             {
                 BancoCodigo = bancoCodigo,
@@ -61,7 +79,11 @@ namespace DesafioOfx.Api.V1.Controllers
             return conta;
         }
 
-
+        /// <summary>
+        /// Adicionar um novo lancamento financeiro para uma determinada conta já existente.
+        /// </summary>
+        /// <param name="transacaoViewModel"></param>
+        /// <returns></returns>
         [HttpPost("adicionar-lancamento-financeiro")]
         public async Task<IActionResult> AdicionarLancamentoFinanceiro(TransacaoViewModel transacaoViewModel)
         {
@@ -78,7 +100,12 @@ namespace DesafioOfx.Api.V1.Controllers
                 return CustomResponse(transacaoViewModel);
 
         }
-
+        /// <summary>
+        /// Altera todas as informações execto contaId e TransacaoId de um lancamento financeiro
+        /// </summary>
+        /// <param name="transacaoId"></param>
+        /// <param name="transacaoViewModel"></param>
+        /// <returns></returns>
         [HttpPatch("alterar-lancamento-financeiro/{transacaoId:int}")]
         public async Task<IActionResult> AlterarLancamentoFinanceiro(int transacaoId, TransacaoViewModel transacaoViewModel)
         {

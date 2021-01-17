@@ -37,7 +37,7 @@ namespace DesafioOfx.Application.Commands
         {
             RuleFor(c => c.ListaLancamentoFinanceiroContaCommand.Count)
                .NotEqual(0)
-               .WithMessage(c => "O lote de lancamento financeiro  está vazio ou invalido");
+               .WithMessage(c => "O lote de lancamento financeiro  está vazio ou inválido");
 
         }
     }

@@ -2,6 +2,7 @@
 using DesafioOfx.Application.Queries.ViewModels;
 using DesafioOfx.Domain.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,8 +27,8 @@ namespace DesafioOfx.Application.Queries
                 vm.AgenciaCodigo = "0001";
                 vm.AgenciaDigito = null;
             }
-            var conta = await _contaRepository.ObterContaPredicado(c => 
-                            c.Agencia.Banco.Codigo == vm.BancoCodigo && 
+            var conta = await _contaRepository.ObterContaPredicado(c =>
+                            c.Agencia.Banco.Codigo == vm.BancoCodigo &&
                             c.Agencia.Codigo == vm.AgenciaCodigo && c.Agencia.Digito == vm.AgenciaDigito &&
                             c.Codigo == vm.ContaCodigo && c.Digito == vm.ContaDigito);
 
@@ -40,9 +41,16 @@ namespace DesafioOfx.Application.Queries
             return _mapper.Map<ContaViewModel>(conta);
         }
 
-        public Task<RelatorioViewModel> ObteRelatorio(int ContId)
+        public Task<RelatorioViewModel> ObterExtratoCliente(int ContId)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<TransacaoViewModel>> ObterExtratoCliente(int contaId, DateTime dataIncio, DateTime dataFim)
+        {
+            return _mapper.Map<List<TransacaoViewModel>>(await _contaRepository.ObterTransacaoPredicado(t => t.ContaId == contaId &&
+                                                  t.DataLancamento >= dataIncio &&
+                                                  t.DataLancamento <= dataFim));
         }
 
         public async Task<TransacaoViewModel> ObterTransacaoPorCodigoUnico(string codigoUnico)

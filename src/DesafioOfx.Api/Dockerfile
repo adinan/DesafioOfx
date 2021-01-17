@@ -27,3 +27,4 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DesafioOfx.Api.dll"]
 
 RUN mkdir -p ofxFiles
+RUN echo $(python -c 'print(" \033[31m Aguerde 60 segundos para que Banco de dados sejá criado e populado \033[0m ")')

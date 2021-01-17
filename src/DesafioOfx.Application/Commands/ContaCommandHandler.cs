@@ -126,52 +126,7 @@ namespace DesafioOfx.Application.Commands
 
             return await _contaRepository.UnitOfWork.Commit();
         }
-        /*
-        private async Task ConverterOfxNetParaContexto(OfxStatement ofxNetInfo, int contaId)
-        {
-            var conta = await _contaRepository.ObterContaPorId(contaId);
-            foreach (var ofx in ofxNetInfo.TransactionList.Transactions)
-            {
-                var command = new AdicionarLancamentoFinanceiroContaCommand(contaId, ofx.TxType.ToString(), ofx.DatePosted.Date, ofx.Amount, ofx.FitId, ofx.ChequeNumber, ofx.ReferenceNumber, ofx.Memo);
-                if (!ValidarComando(command)) continue;
 
-                if (conta.CodigoUnidoEmUso(command.CodigoUnico))
-                {
-                    await _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Transação com o código {command.CodigoUnico} duplicado!"));
-                    continue;
-                }
-
-                var transacao = new Transacao(command.TipoTransacao, command.DataLancamento, command.Valor, command.CodigoUnico, command.Protocolo, command.CodigoReferencia, command.Descricacao);
-                conta.AdicionarTransacao(transacao);
-                conta.AdicionarEvento(new LancamentoFinanceiroAdicionadoContaEvent(conta.Id, transacao.Valor, transacao.DataLancamento));
-            }
-        }
-
-        private bool ValidarArquivo(out OfxStatement ofxNetInfo, string nomeArquivo)
-        {
-            var enderecoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "ofxFiles", $"{nomeArquivo}.ofx");
-            try
-            {
-                ofxNetInfo = OfxDocument.Load(enderecoArquivo)?.GetStatements()?.FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Erro ao converter o arquivo. Erro:{ex.Message}"));
-                ofxNetInfo = new OfxStatement();
-                return false;
-            }
-
-            if (ofxNetInfo == null ||
-                ofxNetInfo.TransactionList == null ||
-                ofxNetInfo.TransactionList.Transactions == null)
-            {
-                _mediatorHandler.PublicarNotificacao(new DomainNotification(GetType().Name, $"Arquivo inválido!"));
-                return false;
-            }
-
-            return true;
-        }
-        */
         private bool ValidarComando(Command message)
         {
             if (message.EhValido()) return true;

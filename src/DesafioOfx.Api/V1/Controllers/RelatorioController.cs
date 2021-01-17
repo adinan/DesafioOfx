@@ -6,6 +6,9 @@ using DesafioOfx.Core.Messages.CommonMessages.Notifications;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Data.SqlTypes;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DesafioOfx.Api.V1.Controllers
@@ -27,14 +30,25 @@ namespace DesafioOfx.Api.V1.Controllers
         }
 
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<ContaViewModel>> ExtratoCliente(int contaId, DateTime dataInicio, DateTime dataFim)
+        [HttpGet("extrato-cliente")]
+        public async Task<ActionResult<List<TransacaoViewModel>>> ExtratoCliente(int contaId, DateTime dataInicio, DateTime dataFim)
         {
-            var conta = await _contaQueries.ObterContaId(contaId);
+            ValidarRequisacao(contaId, dataInicio, dataFim);
 
-            if (conta == null) return NotFound();
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            return conta;
+            var transacoes = await _contaQueries.ObterExtratoCliente(contaId, dataInicio, dataFim);
+
+            if (transacoes == null || !transacoes.Any()) return NotFound();
+
+            return transacoes;
+        }
+
+        private void ValidarRequisacao(int contaId, DateTime dataInicio, DateTime dataFim)
+        { 
+            if (contaId < 1) ModelState.AddModelError("contaId", "contaId inválido");
+            if (dataInicio < SqlDateTime.MinValue.Value) ModelState.AddModelError("dataInicio", "dataInicio inválido");
+            if (dataFim == DateTime.MinValue) ModelState.AddModelError("dataFim", "dataFim inválido");
         }
     }
 }
