@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
     mundiapp:
-        image: froidy/desafiofx-api:lastest
+        image: adinan/desafiofx-api:lastest
         container_name: desafioOfx
         depends_on: 
             - sql-server
@@ -17,7 +17,7 @@ services:
         
     sql-server:
         container_name: sql-server-db
-        image: froidy/desafiofx-sql-server
+        image: adinan/desafiofx-sql-server
         build:
             context: sql
             dockerfile: ./Dockerfile

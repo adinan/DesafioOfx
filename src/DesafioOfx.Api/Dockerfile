@@ -1,5 +1,3 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
@@ -27,4 +25,6 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "DesafioOfx.Api.dll"]
 
 RUN mkdir -p ofxFiles
-RUN echo $(python -c 'print(" \033[31m Aguerde 60 segundos para que Banco de dados sejá criado e populado \033[0m ")')
+
+
+RUN echo WARNING >&2 "\n\nAguarde 60 segundos para que Banco de dados sejá criado e populado\n\n"
