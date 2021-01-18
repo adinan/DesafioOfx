@@ -58,8 +58,8 @@ Pegamos várias bibliotecas do Nuget que fazem a conversão de arquivo .ofx para
  - Post de um lançamento financeiro<br />
  - Pacth de um lançamento financeiro<br />
 2. Importacao<br />
- - Importação com o método de post de um arquivo OFX<br />
+ - Post form-data de um arquivo .ofx com limite de 10Mb<br />
 3. Relatorio<br />
- - Relatório com o método que retorna extrato financeiro de uma Conta<br />
+ - Get que retorna extrato financeiro de uma Conta<br />
   
   
