@@ -16,6 +16,10 @@ namespace DesafioOfx.Domain
 
         public Conta Conta { get; private set; }
 
+        private Transacao(int transacaoId)
+        {
+
+        }
 
         public Transacao(string tipoTransacao, DateTime dataLancamento, decimal valor, string codigoUnico, string protocolo, string codigoReferencia, string descricacao)
         {
@@ -80,6 +84,22 @@ namespace DesafioOfx.Domain
         {
             Descricacao = descricacao;
 
+        }
+
+        private void AlterarId(int id)
+        {
+            Id = id;
+
+        }
+
+        public static class TransacaoFactory
+        {
+           
+            public static Transacao AdicionarIdTransacao(Transacao transacao, int id)
+            {
+                transacao.AlterarId(id);
+                return transacao;
+            }
         }
     }
 }

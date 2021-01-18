@@ -6,7 +6,7 @@ namespace DesafioOfx.Core.DomainObjects
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        public int Id { get; protected set; }
 
         private List<Event> _notificacoes;
         public IReadOnlyCollection<Event> Notificacoes => _notificacoes?.AsReadOnly();

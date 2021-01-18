@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DesafioOfx.Domain
 {
-    public class Conta : Entity
+    public class Conta : Entity, IAggregateRoot
     {
         public int AgenciaId { get; private set; }
         public string Codigo { get; private set; }
@@ -79,6 +79,6 @@ namespace DesafioOfx.Domain
         {
             //regras de commands
             return true;
-        }
+        }       
     }
 }

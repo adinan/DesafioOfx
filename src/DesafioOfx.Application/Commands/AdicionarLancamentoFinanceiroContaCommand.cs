@@ -38,7 +38,7 @@ namespace DesafioOfx.Application.Commands
     }
 
     public class AdicionarLancamentoFinanceiroValidation : AbstractValidator<AdicionarLancamentoFinanceiroContaCommand>
-    {
+    { 
         public AdicionarLancamentoFinanceiroValidation()
         {
             RuleFor(c => c.ContaId)

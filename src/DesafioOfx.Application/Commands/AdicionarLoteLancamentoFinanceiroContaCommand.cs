@@ -24,7 +24,7 @@ namespace DesafioOfx.Application.Commands
             return ValidationResult.IsValid;
         }
 
-        internal void AdicionarComando(AdicionarLancamentoFinanceiroContaCommand command)
+        public void AdicionarComando(AdicionarLancamentoFinanceiroContaCommand command)
         {
             if (!command.EhValido()) return;
             _listaListaLancamentoFinanceiroContaCommand.Add(command);

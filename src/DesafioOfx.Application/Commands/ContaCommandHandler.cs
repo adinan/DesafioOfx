@@ -21,22 +21,16 @@ namespace DesafioOfx.Application.Commands
     {
         private readonly IContaRepository _contaRepository;
         private readonly IMediatorHandler _mediatorHandler;
-        private readonly IContaQueries _contaQueries;
         private readonly DomainNotificationHandler _notifications;
-        private readonly IMapper _mapper;
 
 
-        public ContaCommandHandler(IContaRepository pedidoRepository,
+        public ContaCommandHandler(IContaRepository contaRepository,
                                    IMediatorHandler mediatorHandler,
-                                   IMapper mapper,
-                                   INotificationHandler<DomainNotification> notifications,
-                                   IContaQueries contaQueries)
+                                   INotificationHandler<DomainNotification> notifications)
         {
-            _contaRepository = pedidoRepository;
+            _contaRepository = contaRepository;
             _mediatorHandler = mediatorHandler;
-            _mapper = mapper;
             _notifications = (DomainNotificationHandler)notifications;
-            _contaQueries = contaQueries;
         }
 
 
