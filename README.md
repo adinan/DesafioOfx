@@ -4,6 +4,7 @@ O Desafio consiste de desenvolver uma API RESTful com o intuito de importar arqu
 
 #### Como executar
 Necessário Docker estar instalado na máquina.
+
 Executando o projeto:
 - Baixar ou clonar este repositório.
 - Entre na pasta raiz do projeto, onde se encontra o arquivo docker-compose.yml 
@@ -22,8 +23,8 @@ Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras
 
 A aplicação já vem com uma carga inicial nas tabelas Bancos, Agencias e Contas. Assim sendo possível já subir os 3 arquivos OFXs disponibilizados. 
 
-Para novos arquivos OFX com novos bancos, agencias e contas é necessário popular as tabela de banco agencia e conta via banco de dados.
-
+### Notas
+Para arquivos OFXs com novos agencias e contas é necessário cadastrar as informações via sql visto que o foco e a importação de arquivos OFXs partindo da premissa que já existiram contas agenicas e bancos pre cadastrados
 
 
  
