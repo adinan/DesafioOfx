@@ -2,26 +2,27 @@
 
 O Desafio consiste de desenvolver uma API RESTful com o intuito de importar arquivos OFX e disponibilizar as informações de maneira ótima e eficiente
 
-#### Como executar
-Necessário Docker estar instalado na máquina.
 
-Executando o projeto:
-- Baixar ou clonar este repositório.
-- Entre na pasta raiz do projeto, onde se encontra o arquivo docker-compose.yml 
-- Abra um terminal nesta pasta e rode o comando:
+<details open="open">
+  <summary><b>Mostrar como executar o projeto</b></summary>
 
+1. Tenho o Docker instalado. 
+2. Baixar ou clonar este repositório
+3. Entre na pasta raiz do projeto, onde se encontra o arquivo docker-compose.yml
+4. Abra um terminal nesta pasta e rode o comando
 ```
 docker-compose up -d
 ```
-
-Aguarde os downloads e configurações Docker serem finalizadas e depois as seguintes interfaces estarão disponíveis:
+5. Aguarde os downloads e configurações Docker serem finalizadas e depois as seguintes interfaces estarão disponíveis:
 - Sql Server: localhost,1433 
 - Aplicação (através do swagger): http://localhost:5001/swagger/index.html
 
+6. Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras APIs que precisão de autorização. Utilizar no Header da requisição Authorization: bearer {accessToken}
+7. A aplicação já vem com uma carga inicial nas tabelas Bancos, Agencias e Contas. Assim sendo possível já subir os 3 arquivos OFXs disponibilizados. 
 
-Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras APIs que precisão de autorização. Utilizar no Header da requisição Authorization: bearer {accessToken}
+</details>
 
-A aplicação já vem com uma carga inicial nas tabelas Bancos, Agencias e Contas. Assim sendo possível já subir os 3 arquivos OFXs disponibilizados. 
+
 
 
 ### Notas
