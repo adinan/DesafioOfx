@@ -23,11 +23,12 @@ Após tudo pronto acesse a API Auth e crie um usuário para poder usar as outras
 
 A aplicação já vem com uma carga inicial nas tabelas Bancos, Agencias e Contas. Assim sendo possível já subir os 3 arquivos OFXs disponibilizados. 
 
+
 ### Notas
 Para arquivos OFXs com novos agencias e contas é necessário cadastrar as informações via sql visto que o foco e a importação de arquivos OFXs partindo da premissa que já existiram contas agenicas e bancos pre cadastrados
 
 
- 
+
 ### Tecnologia e Padrões Utilizada BackEnd
 - [DDD (Domain Driven Design)](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [CQRS](https://docs.microsoft.com/pt-br/azure/architecture/patterns/cqrs)
@@ -44,3 +45,7 @@ Para arquivos OFXs com novos agencias e contas é necessário cadastrar as infor
 - FluentValidation
 - [OfxNet](https://github.com/jim-dale/BankingTools) – Projeto para conversão do arquivo OFX para o contexto da aplicação. Fizemos algumas pequenas modificações no projeto.
 
+## APIs
+- Conta com os métodos de get por id e pelas códigos co Banco, Agencia e Conta. Post de um lancamento financeiro e pacth de um lancamento financeiro
+- Importacao com o método de post de um arquivo OFX
+- Relatorio com o método que retorna extrato financeiro de uma Conta.
