@@ -3,7 +3,7 @@
 O Desafio consiste de desenvolver uma API RESTful com o intuito de importar arquivos OFX e disponibilizar as informações de maneira ótima e eficiente
 
 
-<details open="open">
+<details>
   <summary><b>Mostrar como executar o projeto</b></summary>
 
 1. Tenho o Docker instalado. 
@@ -26,7 +26,7 @@ docker-compose up -d
 
 
 ### Notas
-Para arquivos OFXs com novos agencias e contas é necessário cadastrar as informações via sql visto que o foco e a importação de arquivos OFXs partindo da premissa que já existiram contas agenicas e bancos pre cadastrados
+Para arquivos OFXs com novas agencias e contas é necessário cadastrar as informações via sql visto que o foco é a importação de arquivos OFXs partindo da premissa que já existiram contas agenicas e bancos pre cadastrados
 
 
 
@@ -39,14 +39,23 @@ Para arquivos OFXs com novos agencias e contas é necessário cadastrar as infor
 - [.Net 5](https://docs.microsoft.com/pt-br/dotnet/core/dotnet-five) 
 - [Entity Framework Core 5.0]( https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/whatsnew) (ORM – Banco Relacional)
 - [Identity Core com JWT]( https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-5.0) (autenticação e segurança da API)
-- Elmah - Para log de Eventos Web
-- Autommaper 
-- Swagger
-- MediatR
-- FluentValidation
+- [Elmah](https://elmah.io/) (Para log de Eventos Web)
+- [Autommaper](https://docs.automapper.org/en/stable/)
+- [Swagger] (https://swagger.io/docs/)
+- [MediatR] (https://github.com/jbogard/MediatR/wiki)
+- [AutoMocker] (https://github.com/moq/Moq.AutoMocker)
+- [FluentValidation] (https://docs.fluentvalidation.net/en/latest/)
 - [OfxNet](https://github.com/jim-dale/BankingTools) – Projeto para conversão do arquivo OFX para o contexto da aplicação. Fizemos algumas pequenas modificações no projeto.
 
 ## APIs
-- Conta com os métodos de get por id e pelas códigos co Banco, Agencia e Conta. Post de um lancamento financeiro e pacth de um lancamento financeiro
-- Importacao com o método de post de um arquivo OFX
-- Relatorio com o método que retorna extrato financeiro de uma Conta.
+1. Conta <br />
+ - Get por id<br />
+ - Get por códigos do Banco, Agencia e Conta<br />
+ - Post de um lancamento financeiro<br />
+ - Pacth de um lancamento financeiro<br />
+2. Importacao<br />
+ - Importação com o método de post de um arquivo OFX<br />
+3. Relatorio<br />
+ - Relatório com o método que retorna extrato financeiro de uma Conta<br />
+  
+  
