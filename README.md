@@ -31,7 +31,7 @@ Para novos arquivos OFX com novos bancos, agencias e contas é necessário popul
 - [DDD (Domain Driven Design)](https://en.wikipedia.org/wiki/Domain-driven_design)
 - [CQRS](https://docs.microsoft.com/pt-br/azure/architecture/patterns/cqrs)
 - [Web API]( https://docs.microsoft.com/pt-br/aspnet/core/web-api/?view=aspnetcore-5.0) (usando conceito RESTful);
-- [XUnit](https://xunit.net/) (Para testes de unidade)
+- [XUnit](https://xunit.net/) (Para testes de unidade. Utilizado tmb MOQ e Bogus)
 - [C# ](https://msdn.microsoft.com/en-us/library/kx37x362.aspx) 
 - [.Net 5](https://docs.microsoft.com/pt-br/dotnet/core/dotnet-five) 
 - [Entity Framework Core 5.0]( https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-5.0/whatsnew) (ORM – Banco Relacional)
